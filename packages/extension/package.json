@@ -1,0 +1,12 @@
+{
+  "name": "@msw-devtools/extension",
+  "version": "0.1",
+  "license": "MIT",
+  "scripts": {
+    "dev": "NODE_ENV=development npx webpack serve",
+    "build": "NODE_ENV=production npx webpack"
+  },
+  "devDependencies": {
+    "@msw-devtools/connect": "*"
+  }
+}

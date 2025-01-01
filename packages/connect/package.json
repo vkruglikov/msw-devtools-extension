@@ -1,0 +1,25 @@
+{
+  "name": "@msw-devtools/connect",
+  "version": "0.1",
+  "type": "module",
+  "license": "MIT",
+  "types": "./dist/index.d.ts",
+  "source": "src/index.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "msw": "^2.7.0"
+  }
+}
