@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@msw-devtools/connect": "*",
+    "@msw-devtools/core": "*",
     "@msw-devtools/json-config": "*",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",

@@ -1,0 +1,16 @@
+name: Build check
+
+on:
+  push:
+
+jobs:
+  install-deps:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+      - uses: ./.github/actions/install-npm-deps
+
+      - name: Build all packages
+        run: npm run build

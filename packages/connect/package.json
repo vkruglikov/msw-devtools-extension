@@ -19,6 +19,9 @@
   "files": [
     "dist"
   ],
+  "devDependencies": {
+    "@msw-devtools/core": "*"
+  },
   "peerDependencies": {
     "msw": "^2.7.0"
   }

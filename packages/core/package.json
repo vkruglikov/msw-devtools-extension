@@ -12,5 +12,8 @@
   "scripts": {
     "build": "microbundle --no-pkg-main -f modern",
     "dev": "microbundle watch --no-pkg-main -f modern"
+  },
+  "dependencies": {
+    "@msw-devtools/json-config": "*"
   }
 }
