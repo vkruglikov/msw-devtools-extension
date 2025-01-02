@@ -5,7 +5,13 @@ import { http } from 'msw'
 const handlers = [http.all('*', createResponseResolver())]
 
 setupWorker(...handlers).start({
-  onUnhandledRequest: 'bypass'
+  onUnhandledRequest: 'bypass',
+  serviceWorker: {
+    url:
+      process.env.NODE_ENV === 'production'
+        ? '/msw-devtools-extension/mockServiceWorker.js'
+        : '/mockServiceWorker.js'
+  }
 })
 ;(document.getElementById('form') as HTMLFormElement).addEventListener(
   'submit',

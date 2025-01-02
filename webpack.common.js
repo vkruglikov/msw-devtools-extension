@@ -2,7 +2,10 @@ const path = require('path')
 const webpack = require('webpack')
 const CopyPlugin = require('copy-webpack-plugin')
 
+const IS_DEV = process.env.NODE_ENV === 'development'
+
 module.exports = ({ root, port, wdsClient = true }) => ({
+  mode: IS_DEV ? 'development' : 'production',
   module: {
     rules: [
       {
@@ -27,18 +30,20 @@ module.exports = ({ root, port, wdsClient = true }) => ({
       }
     ]
   },
-  devtool: 'inline-source-map',
-  devServer: {
-    port,
-    compress: true,
-    static: {
-      directory: path.join(root, 'dist')
-    },
-    client: wdsClient ? undefined : false,
-    devMiddleware: {
-      writeToDisk: true
-    }
-  },
+  devtool: IS_DEV ? 'inline-source-map' : false,
+  devServer: IS_DEV
+    ? {
+        port,
+        compress: true,
+        static: {
+          directory: path.join(root, 'dist')
+        },
+        client: wdsClient ? undefined : false,
+        devMiddleware: {
+          writeToDisk: true
+        }
+      }
+    : false,
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },

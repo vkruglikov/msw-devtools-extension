@@ -1,0 +1,37 @@
+name: Deploy @msw-devtools/demo
+
+on:
+  push:
+    branches: ['master']
+    paths:
+      - 'packages/demo/**'
+      - '.github/workflows/demo.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy-demo:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+      - uses: ./.github/actions/install-npm-deps
+
+      - name: Build all packages
+        run: npm run build -- --filter=@msw-devtools/demo
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './packages/demo/dist/.'
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

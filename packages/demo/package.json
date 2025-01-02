@@ -1,6 +1,7 @@
 {
   "name": "@msw-devtools/demo",
   "version": "0.1",
+  "author": "Valentin Kruglikov",
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development npx webpack serve",
@@ -11,8 +12,6 @@
     "@msw-devtools/json-config": "*"
   },
   "msw": {
-    "workerDirectory": [
-      "dist"
-    ]
+    "workerDirectory": "./public"
   }
 }
