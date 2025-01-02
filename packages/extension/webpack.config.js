@@ -1,33 +1,23 @@
-const path = require('path')
+const createWebpackConfig = require('../../webpack.common.js')
+
+const IS_DEV = process.env.NODE_ENV === 'development'
 
 module.exports = {
+  ...createWebpackConfig({
+    root: __dirname,
+    port: 8082,
+    wdsClient: false
+  }),
   entry: {
-    background: './src/background.ts',
+    background: [
+      IS_DEV ? './src/utils/wds-listener.ts' : null,
+      './src/background.ts'
+    ].filter(Boolean),
     content: './src/content.ts',
-    popup: './src/popup.ts'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
-      }
-    ]
-  },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'public')
-    }
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js']
-  },
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  performance: {
-    hints: false
+    injected: './src/injected.ts',
+    popup: [
+      IS_DEV ? 'webpack-dev-server/client' : null,
+      './src/popup.ts'
+    ].filter(Boolean)
   }
 }

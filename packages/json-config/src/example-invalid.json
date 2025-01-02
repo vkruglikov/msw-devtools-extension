@@ -1,0 +1,12 @@
+{
+  "method": "GET",
+  "body": {
+    "firstName": "John",
+    "lastName": "Maverick"
+  },
+  "init": {
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

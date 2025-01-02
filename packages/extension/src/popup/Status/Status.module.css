@@ -1,0 +1,31 @@
+.status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    &.success {
+        .icon {
+            background: #2ce32c;
+        }
+    }
+    &.pending {
+        .icon {
+            background: #e3b82c;
+        }
+    }
+    &.error {
+        .icon {
+            background: #e32c2c;
+        }
+    }
+
+    .icon {
+        align-self: flex-start;
+        flex-shrink: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        transform: translateY(50%);
+    }
+}

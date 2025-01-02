@@ -13,8 +13,15 @@
       "run_at": "document_start"
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "permissions": ["storage", "tabs", "activeTab"],
   "action": {
+    "default_icon": "icon.png",
     "default_popup": "popup.html",
     "default_title": "Upload JSON"
   }

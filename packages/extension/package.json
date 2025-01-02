@@ -7,6 +7,12 @@
     "build": "NODE_ENV=production npx webpack"
   },
   "devDependencies": {
-    "@msw-devtools/connect": "*"
+    "@msw-devtools/connect": "*",
+    "@msw-devtools/json-config": "*",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "clsx": "^2.1.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }

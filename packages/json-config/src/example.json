@@ -1,0 +1,26 @@
+{
+  "/test": {
+    "method": "GET",
+    "body": {
+      "firstName": "John",
+      "lastName": "Maverick"
+    },
+    "init": {
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  "/222": {
+    "method": "GET",
+    "body": {
+      "firstName": "SS",
+      "lastName": "SS"
+    },
+    "init": {
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  }
+}

@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "jsx": "react",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["packages/**/src/*"],
+  "include": ["packages/*/src/**/*", "packages/*/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

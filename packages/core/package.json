@@ -1,0 +1,16 @@
+{
+  "name": "@msw-devtools/core",
+  "version": "0.1",
+  "type": "module",
+  "license": "MIT",
+  "types": "./dist/index.d.ts",
+  "source": "./src/index.ts",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "microbundle --no-pkg-main -f modern",
+    "dev": "microbundle watch --no-pkg-main -f modern"
+  }
+}
