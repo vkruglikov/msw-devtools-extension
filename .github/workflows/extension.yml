@@ -1,0 +1,48 @@
+name: Deploy @msw-devtools/extension
+
+on:
+  push:
+    branches: ['master']
+    paths:
+      - 'packages/core/**'
+      - 'packages/extension/**'
+      - 'webpack.common.js'
+      - '.github/workflows/extension.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+      - uses: ./.github/actions/install-npm-deps
+
+      - name: Build @msw-devtools/extension
+        run: npm run build -- --filter=@msw-devtools/extension
+
+      - name: Archive @msw-devtools/extension
+        run: zip -r dist.zip ./packages/extension/dist
+
+      - name: Archive @msw-devtools/extension
+        run: |
+          tar -czf dist.tar.gz ./packages/extension/dist
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist.zip
+            dist.tar.gz
+          make_latest: true
+          name: "@msw-devtools/extension"
+          tag_name: "latest"
