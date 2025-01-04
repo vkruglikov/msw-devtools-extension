@@ -1,8 +1,13 @@
 import { setupWorker } from 'msw/browser'
 import { createResponseResolver } from '@msw-devtools/connect'
-import { http } from 'msw'
+import { http, HttpResponse } from 'msw'
 
-const handlers = [http.all('*', createResponseResolver())]
+const handlers = [
+  http.get('/user', () => {
+    return HttpResponse.json({ ping: 'pong' })
+  }),
+  http.all('*', createResponseResolver())
+]
 
 setupWorker(...handlers).start({
   onUnhandledRequest: 'bypass',
