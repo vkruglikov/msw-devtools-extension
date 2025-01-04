@@ -4,8 +4,9 @@ on:
   push:
     branches: ['master']
     paths:
-      - 'packages/demo/**'
+      - 'packages/*/**'
       - '.github/workflows/demo.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read

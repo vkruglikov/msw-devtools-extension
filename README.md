@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="media/chrome-devtools.svg" width="100" alt="Mock Service Worker logo" />
+  <img src="media/chrome-devtools.svg" width="100" alt="DevTools logo" />
   <img src="media/msw-logo.svg" width="100" alt="Mock Service Worker logo" />
-  <img src="media/chrome-extension.svg" width="100" alt="Mock Service Worker logo" />
+  <img src="media/chrome-extension.svg" width="100" alt="Chrome Web Store logo" />
 </p>
 
 <h1 align="center">Mock Service Worker DevTools Extension</h1>
@@ -10,18 +10,26 @@
 > In this pre-release version, every update clears the configuration storage!  
 > Be cautious and make sure to save your JSON configurations locally to avoid losing them. 💾
 
-### Overview
+## Overview
 
 This Chrome extension simplifies working with [Mock Service Worker (MSW)](https://mswjs.io/). Instead of manually writing handlers, you can upload JSON files with mock requests, manage multiple configurations, and switch between them seamlessly. 🛠️
 
-### Key Features 🌟
+## Key Features 🌟
 
-- **📂 JSON Import**: Easily upload JSON files containing mock request configurations.
-- **🔄 Multi-JSON Support**: Switch seamlessly between multiple JSON configurations within the same host environment.
-- **🤝 User-Friendly Interface**: A convenient tool for developers and testers alike, saving time and effort when working with [MSW](https://mswjs.io/).
-- **⚡ Enhanced Productivity**: Focus more on your development and testing tasks without the hassle of manually writing mock handlers.
+### 📂 JSON Import
+Easily upload JSON files containing mock request configurations.
 
-### Motivation 💡
+<img width="300px" src="./media/extension/statuses.png" />
+
+### 🔄 Multi-JSON Support
+Switch seamlessly between multiple JSON configurations within the same host environment.
+
+<img width="300px" src="./media/extension/multi-configs.png" />
+
+### 🔄 Edit json config in the DevTools
+WORK IN PROGRESS.....
+
+## Motivation 💡
 
 This extension is a game-changer for both developers and QA testers working with [MSW](https://mswjs.io/). 🧑‍💻👩‍💻  
 Instead of manually defining handlers for every request, you can now upload pre-configured JSON files, whether it's a single file or multiple files for different scenarios. Switching between configurations is quick and easy, making this tool highly efficient for various development and testing workflows. 🚀
@@ -31,13 +39,13 @@ Instead of manually defining handlers for every request, you can now upload pre-
 ### Installation
 
 ```bash
-npm install @msw-devtools/connect --save
+npm install @msw-devtools/connect --save-exact
 ```
 
 ### Integrate to existing MSW setup
 
-> We assume that you are already familiar with MSW (Mock Service Worker) and have
-> set up your project to work with it. If not, please visit the official MSW website for guidance.
+> We assume that you are already familiar with [Mock Service Worker (MSW)](https://mswjs.io/) and have
+> set up your project to work with it. If not, please visit the official [MSW](https://mswjs.io/) website for guidance.
 
 
 Just add the response resolver handler from `@msw-devtools/connect`
@@ -58,6 +66,8 @@ setupWorker(...handlers).start({
 
 ### Install Chrome Extension
 
-Install the extension from the Chrome Web Store or load the unpacked extension from the `packages/extension/dist` directory.:
+Chrome Extension is not yet published to Chrome Web Store.
 
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/TODO)](https://chrome.google.com/webstore/detail/TODO)
+You can only install it downloading the build and loading it as an unpacked extension.
+
+[![Download Chrome Extension](https://img.shields.io/badge/download-chrome_extension_dist-brightgreen)](https://github.com/vkruglikov/msw-devtools-extension/releases/download/latest/dist.zip)

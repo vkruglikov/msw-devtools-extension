@@ -4,16 +4,7 @@ on:
   push:
     branches: ['master']
     paths:
-      - 'packages/core/**'
-      - 'packages/extension/**'
-      - 'webpack.common.js'
-      - '.github/workflows/extension.yml'
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+      - 'packages/extension/package.json'
 
 jobs:
   release:

@@ -1,6 +1,6 @@
 import { passthrough, ResponseResolver, HttpResponse } from 'msw'
 
-export const responseResolver: ResponseResolver = ({ requestId, request }) => {
+const responseResolver: ResponseResolver = ({ requestId, request }) => {
   return new Promise((resolve, reject) => {
     if (window.__MSW_DEVTOOLS_EXTENSION?.resolve) {
       window.__MSW_DEVTOOLS_EXTENSION
@@ -17,7 +17,7 @@ export const responseResolver: ResponseResolver = ({ requestId, request }) => {
   })
 }
 
-export const createResponseResolver = () => {
+export const createResponseResolver = (): ResponseResolver => {
   if (!window.__MSW_DEVTOOLS_EXTENSION) {
     if (!window.__MSW_DEVTOOLS_EXTENSION_QUEUE) {
       window.__MSW_DEVTOOLS_EXTENSION_QUEUE = []

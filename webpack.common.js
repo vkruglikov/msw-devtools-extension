@@ -5,6 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const IS_DEV = process.env.NODE_ENV === 'development'
 
 module.exports = ({ root, port, wdsClient = true }) => ({
+  mode: IS_DEV ? 'development' : 'production',
   module: {
     rules: [
       {
@@ -34,6 +35,11 @@ module.exports = ({ root, port, wdsClient = true }) => ({
           }
         ],
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+        exclude: /\.module\.css$/i
       }
     ]
   },

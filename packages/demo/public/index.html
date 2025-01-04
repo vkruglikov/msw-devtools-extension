@@ -2,31 +2,13 @@
 <html lang="en">
   <head>
     <title>@msw-devtools | Mock Service Worker Chrome Devtools Extension</title>
-    <style>
-      pre {
-        background-color: #f4f4f4;
-        padding: 10px;
-        border-radius: 5px;
-        overflow-x: auto;
-        font-family: Consolas, Monaco, 'Courier New', monospace;
-        border: 1px solid #ddd;
-      }
-    </style>
+    <meta
+      type="description"
+      content="Mock Service Worker Chrome Devtools Extension"
+    />
   </head>
   <body>
-    <h3>Demo @msw-devtools extension</h3>
-    <form id="form">
-      <p>
-        <label>
-          url:
-          <input id="url" value="/test" type="text" />
-        </label>
-      </p>
-      <p>
-        <button type="submit">Request</button>
-      </p>
-    </form>
-    <pre id="request-response">Press "Request" button to show the response</pre>
-    <script type="module" src="main.js"></script>
+    <div id="root"></div>
+    <script src="main.js"></script>
   </body>
 </html>

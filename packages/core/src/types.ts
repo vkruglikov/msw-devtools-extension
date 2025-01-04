@@ -1,4 +1,4 @@
-import type { JsonConfig } from './config'
+import type { JsonConfig } from '@msw-devtools/json-config'
 import type { ResponseResolver } from 'msw'
 
 export enum MessageType {

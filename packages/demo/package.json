@@ -8,7 +8,11 @@
     "build": "NODE_ENV=production npx webpack"
   },
   "devDependencies": {
-    "@msw-devtools/connect": "*"
+    "@msw-devtools/connect": "*",
+    "@msw-devtools/core": "*",
+    "@msw-devtools/extension": "*",
+    "@msw-devtools/json-config": "*",
+    "json-edit-react": "^1.19.1"
   },
   "msw": {
     "workerDirectory": "./public"

@@ -3,6 +3,7 @@
     align-items: center;
     gap: 10px;
     text-align: left;
+    font-weight: bold;
 
     &.success {
         .icon {

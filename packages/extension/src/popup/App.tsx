@@ -8,11 +8,8 @@ import React, {
   useRef,
   useState
 } from 'react'
-import {
-  LocalStorageConfigKey,
-  validateJsonConfig,
-  ValidationError
-} from '@msw-devtools/core'
+import { validateJsonConfig, ValidationError } from '@msw-devtools/json-config'
+import { LocalStorageConfigKey } from '@msw-devtools/core'
 
 import packageJson from '../../package.json'
 

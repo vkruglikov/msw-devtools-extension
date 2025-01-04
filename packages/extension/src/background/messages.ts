@@ -58,7 +58,7 @@ const messages: HandlersMap = {
         ? config.handlers[path] || config.handlers[url.origin + path]
         : null
 
-      if (!response || message.request.method !== (response.method || 'GET')) {
+      if (!response || message.request.method !== response.method) {
         throw new Error('No response found')
       }
 

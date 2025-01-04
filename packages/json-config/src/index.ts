@@ -23,7 +23,7 @@ export const jsonConfigSchema = z.object({
           .object({
             'Content-Type': z.string()
           })
-          .catchall(z.string()),
+          .catchall(z.union([z.string(), z.null()])),
         status: z.number().int().min(100).max(599).optional()
       })
     })

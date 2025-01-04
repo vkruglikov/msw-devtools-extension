@@ -1,5 +1,5 @@
 {
-  "name": "@msw-devtools/core",
+  "name": "@msw-devtools/json-config",
   "version": "0.1",
   "type": "module",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "build": "microbundle --no-pkg-main -f modern",
     "dev": "microbundle watch --no-pkg-main -f modern"
   },
-  "devDependencies": {
-    "@msw-devtools/json-config": "*"
+  "dependencies": {
+    "zod": "^3.24.1"
   }
 }
