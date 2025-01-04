@@ -1,111 +1,29 @@
-import {
-  MessageType,
-  BackgroundReceiveMessage,
-  ChromeExtensionLocalStorage,
-  BackgroundResponseMessage
-} from '@msw-devtools/core'
+import { activeMswResolvers } from './background/activeMswResolvers'
+import { handleMessage } from './background/messages'
 
-const getJsonConfig = () =>
-  new Promise<ChromeExtensionLocalStorage['jsonConfig']>((resolve, reject) => {
-    try {
-      chrome.storage.local.get<ChromeExtensionLocalStorage>(
-        'jsonConfig',
-        (result) => {
-          if (chrome.runtime.lastError) {
-            reject(chrome.runtime.lastError.message)
-          } else {
-            resolve(result.jsonConfig)
-          }
-        }
-      )
-    } catch (e) {
-      reject(e)
-    }
+chrome.tabs.onRemoved.addListener((tabId) => {
+  activeMswResolvers.remove({
+    tabId
   })
+})
+chrome.runtime.onInstalled.addListener(() => {
+  /**
+   * Because the extension has pre-release version, which may have breaking changes,
+   */
+  chrome.storage.local.clear()
+})
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (!tab.url || !/^https?:/.test(tab.url)) return
 
-chrome.runtime.onMessage.addListener(
-  (
-    message: BackgroundReceiveMessage,
-    sender,
-    sendResponse: (response: BackgroundResponseMessage) => void
-  ) => {
-    if (message.type === MessageType.Content) {
-      const url = new URL(message.request.url)
-      const path = url.pathname + url.search
-
-      getJsonConfig()
-        .then((jsonPathMapper) => {
-          const response = jsonPathMapper
-            ? jsonPathMapper[path] || jsonPathMapper[url.origin + path]
-            : null
-
-          if (
-            !response ||
-            message.request.method !== (response.method || 'GET')
-          ) {
-            return Promise.reject('No response found')
-          }
-
-          sendResponse({
-            type: MessageType.HandledRequest,
-            response: {
-              ...response,
-              body:
-                typeof response.body !== 'string'
-                  ? JSON.stringify(response.body)
-                  : response.body
-            }
-          })
-        })
-        .catch(() => {
-          sendResponse({
-            type: MessageType.UnhandledRequest
-          })
-        })
-    } else if (message.type === MessageType.SetJsonConfig) {
-      chrome.storage.local.set<ChromeExtensionLocalStorage>(
-        { jsonConfig: message.payload },
-        () => {
-          if (chrome.runtime.lastError) {
-            console.error(
-              'Failed to save JSON config:',
-              chrome.runtime.lastError.message
-            )
-          }
-
-          sendResponse({ type: message.type, status: 'success' })
-        }
-      )
-    } else if (message.type === MessageType.Status) {
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        try {
-          const tabUrl = tabs[0]?.url
-          if (!tabUrl) {
-            throw new Error('Failed to retrieve the active tab URL.')
-          }
-
-          const host = new URL(tabUrl).host
-
-          sendResponse({
-            type: message.type,
-            status: 'success',
-            payload: {
-              host,
-              hasHandle: true,
-              hasConfig: true,
-              configIsValid: true
-            }
-          })
-        } catch (e) {
-          console.error(e)
-          sendResponse({
-            type: message.type,
-            status: 'error'
-          })
-        }
-      })
-    }
-
-    return true
+  if (changeInfo.status === 'loading') {
+    activeMswResolvers.remove({
+      tabId
+    })
+  } else if (changeInfo.status === 'complete') {
+    chrome.scripting.executeScript({
+      target: { tabId: tabId },
+      files: ['content.js']
+    })
   }
-)
+})
+chrome.runtime.onMessage.addListener(handleMessage)

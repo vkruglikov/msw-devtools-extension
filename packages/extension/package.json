@@ -9,7 +9,7 @@
   "devDependencies": {
     "@msw-devtools/connect": "*",
     "@msw-devtools/core": "*",
-    "@msw-devtools/json-config": "*",
+    "@msw-devtools/wds-extension-client": "*",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "clsx": "^2.1.1",

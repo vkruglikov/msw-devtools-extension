@@ -8,8 +8,7 @@ export const responseResolver: ResponseResolver = ({ requestId, request }) => {
         .then((response) => {
           resolve(new HttpResponse(response.body, response.init))
         })
-        .catch((e) => {
-          console.log(e)
+        .catch(() => {
           resolve(passthrough())
         })
     } else {
@@ -18,4 +17,24 @@ export const responseResolver: ResponseResolver = ({ requestId, request }) => {
   })
 }
 
-export const createResponseResolver = () => responseResolver
+export const createResponseResolver = () => {
+  if (!window.__MSW_DEVTOOLS_EXTENSION) {
+    if (!window.__MSW_DEVTOOLS_EXTENSION_QUEUE) {
+      window.__MSW_DEVTOOLS_EXTENSION_QUEUE = []
+    }
+    window.__MSW_DEVTOOLS_EXTENSION = {
+      handleInitialized() {
+        window.__MSW_DEVTOOLS_EXTENSION_QUEUE?.push(() => {
+          window.__MSW_DEVTOOLS_EXTENSION?.handleInitialized()
+        })
+      },
+      resolve() {
+        return Promise.reject('Handle not initialized')
+      }
+    }
+  }
+
+  window.__MSW_DEVTOOLS_EXTENSION.handleInitialized()
+
+  return responseResolver
+}

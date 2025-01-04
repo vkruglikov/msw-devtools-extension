@@ -1,0 +1,10 @@
+.wrapper {
+    all: unset;
+
+    cursor: pointer;
+    color: #858585;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

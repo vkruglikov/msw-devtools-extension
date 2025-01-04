@@ -1,5 +1,5 @@
 {
-  "name": "@msw-devtools/core",
+  "name": "@msw-devtools/wds-extension-client",
   "version": "0.1",
   "type": "module",
   "license": "MIT",
@@ -12,8 +12,5 @@
   "scripts": {
     "build": "microbundle --no-pkg-main -f modern",
     "dev": "microbundle watch --no-pkg-main -f modern"
-  },
-  "dependencies": {
-    "zod": "^3.24.1"
   }
 }

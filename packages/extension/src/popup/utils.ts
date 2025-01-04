@@ -1,12 +1,14 @@
-import { MessageType } from '@msw-devtools/core'
 import {
+  JsonConfig,
+  LocalStorageConfigKey,
+  MessageType,
   BackgroundReceiveMessage,
   BackgroundResponseMessage
-} from '@msw-devtools/core/src'
+} from '@msw-devtools/core'
 
 const sendMessage = <
   M extends BackgroundReceiveMessage,
-  R extends BackgroundResponseMessage
+  R = Extract<BackgroundResponseMessage, { type: M['type'] }>
 >(
   message: M,
   responseCallback: (response: R) => void,
@@ -23,14 +25,78 @@ const sendMessage = <
   }
 }
 
-export const getStatus = async () => {
-  return new Promise<{
-    hasHandle: boolean
-    hasConfig: boolean
-    configIsValid: boolean
-    host?: string
-  }>((resolve, reject) => {
-    sendMessage(
+export const setActiveConfig = async (
+  host: string,
+  key: LocalStorageConfigKey
+) => {
+  return new Promise<void>((resolve, reject) => {
+    sendMessage<
+      Extract<
+        BackgroundReceiveMessage,
+        { type: MessageType.SetActiveJsonConfig }
+      >
+    >(
+      { type: MessageType.SetActiveJsonConfig, key, host },
+      (response) => {
+        try {
+          if (chrome.runtime?.lastError) {
+            throw new Error(chrome.runtime.lastError.message)
+          }
+          if (response?.status !== 'success') {
+            throw new Error('Failed to retrieve the status from background.')
+          }
+          resolve()
+        } catch (e) {
+          reject()
+        }
+      },
+      {
+        type: MessageType.SetActiveJsonConfig,
+        status: 'success'
+      }
+    )
+  })
+}
+
+export const removeConfig = async (
+  host: string,
+  key: LocalStorageConfigKey
+) => {
+  return new Promise<void>((resolve, reject) => {
+    sendMessage<
+      Extract<BackgroundReceiveMessage, { type: MessageType.RemoveJsonConfig }>
+    >(
+      { type: MessageType.RemoveJsonConfig, key, host },
+      (response) => {
+        try {
+          if (chrome.runtime?.lastError) {
+            throw new Error(chrome.runtime.lastError.message)
+          }
+          if (response?.status !== 'success') {
+            throw new Error('Failed to retrieve the status from background.')
+          }
+          resolve()
+        } catch (e) {
+          reject()
+        }
+      },
+      {
+        type: MessageType.RemoveJsonConfig,
+        status: 'success'
+      }
+    )
+  })
+}
+export const getStatus = async (host: string) => {
+  return new Promise<
+    Extract<
+      BackgroundResponseMessage,
+      { type: MessageType.Status; payload: any }
+    >['payload']
+  >((resolve, reject) => {
+    sendMessage<
+      Extract<BackgroundReceiveMessage, { type: MessageType.Status }>
+    >(
       { type: MessageType.Status },
       (response) => {
         try {
@@ -43,9 +109,10 @@ export const getStatus = async () => {
           resolve(response.payload)
         } catch (e) {
           resolve({
+            host,
             hasHandle: false,
             hasConfig: false,
-            configIsValid: false
+            configNames: {}
           })
         }
       },
@@ -55,18 +122,29 @@ export const getStatus = async () => {
         payload: {
           hasHandle: true,
           hasConfig: true,
-          configIsValid: true,
-          host: 'localhost:3000'
+          activeConfig: 'host=localhost&name=production&jsonConfig=1',
+          configNames: {
+            production: {
+              key: 'host=localhost&name=production&jsonConfig=1'
+            },
+            development: {
+              key: 'host=localhost&name=development&jsonConfig=1'
+            },
+            staging: {
+              key: 'host=localhost&name=staging&jsonConfig=1'
+            }
+          },
+          host: window.location.host
         }
       }
     )
   })
 }
-export const saveTo = async (...asd: any[]) => {
-  const jsonData = asd[0]
+
+export const saveTo = async (host: string, config: JsonConfig) => {
   return new Promise<void>((resolve, reject) => {
     sendMessage(
-      { type: MessageType.SetJsonConfig, payload: jsonData },
+      { type: MessageType.SetJsonConfig, config, host },
       (response) => {
         try {
           if (chrome.runtime?.lastError) {

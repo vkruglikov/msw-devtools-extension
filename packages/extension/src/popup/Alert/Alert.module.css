@@ -5,5 +5,12 @@
     background: #2a2c30;
     font-weight: bold;
     color: #ffffff;
-    line-height: 1.4em;
+
+    > * {
+        margin-bottom: 6px;
+    }
+
+    > *:last-child {
+        margin-bottom: 0;
+    }
 }

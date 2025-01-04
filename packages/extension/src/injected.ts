@@ -1,6 +1,14 @@
 import { MessageType } from '@msw-devtools/core'
 
 window.__MSW_DEVTOOLS_EXTENSION = {
+  handleInitialized: () => {
+    window.postMessage(
+      {
+        type: MessageType.HandleInitialized
+      },
+      window.location.origin
+    )
+  },
   resolve: ({ request, requestId }) => {
     return new Promise((resolve, reject) => {
       const handleMessage = (
@@ -43,4 +51,8 @@ window.__MSW_DEVTOOLS_EXTENSION = {
       )
     })
   }
+}
+
+while (window.__MSW_DEVTOOLS_EXTENSION_QUEUE?.length) {
+  window.__MSW_DEVTOOLS_EXTENSION_QUEUE.shift()?.()
 }

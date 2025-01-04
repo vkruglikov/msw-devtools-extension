@@ -1,28 +1,22 @@
 {
   "manifest_version": 3,
-  "name": "JSON Uploader",
-  "version": "1.0",
-  "description": "Upload JSON to IndexDB",
+  "name": "MSW Devtools Extension",
+  "version": "0.1",
+  "description": "Handling msw requests on json",
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "run_at": "document_start"
-    }
-  ],
   "web_accessible_resources": [
     {
       "resources": ["injected.js"],
       "matches": ["<all_urls>"]
     }
   ],
-  "permissions": ["storage", "tabs", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "permissions": ["scripting", "storage", "tabs", "activeTab"],
   "action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html",
-    "default_title": "Upload JSON"
+    "default_title": "Upload JSON Config"
   }
 }

@@ -1,0 +1,1 @@
+export const STABLE_CONFIG_VERSION = 1

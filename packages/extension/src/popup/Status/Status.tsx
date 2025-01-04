@@ -1,13 +1,12 @@
-import React, { FC, PropsWithChildren } from 'react'
+import React, { FC, PropsWithChildren, ReactNode } from 'react'
 import { clsx } from 'clsx'
 
 import styles from './Status.module.css'
 
-export const Status: FC<
-  PropsWithChildren<{
-    type: 'success' | 'error' | 'pending'
-  }>
-> = ({ type, children }) => {
+export const Status: FC<{
+  type: 'success' | 'error' | 'pending'
+  children: Exclude<ReactNode, undefined>
+}> = ({ type, children }) => {
   return (
     <div
       className={clsx(styles.status, {

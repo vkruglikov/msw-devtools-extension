@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "name": "example",
+  "handlers": {
+    "/test": {
+      "method": "GET",
+      "body": {
+        "name": "Name from example config"
+      },
+      "init": {
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    }
+  }
+}

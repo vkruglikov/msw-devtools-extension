@@ -2,6 +2,12 @@ const createWebpackConfig = require('../../webpack.common.js')
 
 const IS_DEV = process.env.NODE_ENV === 'development'
 
+const entry = (paths) =>
+  [
+    IS_DEV ? '@msw-devtools/wds-extension-client' : null,
+    ...(Array.isArray(paths) ? paths : [paths])
+  ].filter(Boolean)
+
 module.exports = {
   ...createWebpackConfig({
     root: __dirname,
@@ -9,15 +15,9 @@ module.exports = {
     wdsClient: false
   }),
   entry: {
-    background: [
-      IS_DEV ? './src/utils/wds-listener.ts' : null,
-      './src/background.ts'
-    ].filter(Boolean),
-    content: './src/content.ts',
-    injected: './src/injected.ts',
-    popup: [
-      IS_DEV ? 'webpack-dev-server/client' : null,
-      './src/popup.ts'
-    ].filter(Boolean)
+    background: entry('./src/background.ts'),
+    content: entry('./src/content.ts'),
+    injected: entry('./src/injected.ts'),
+    popup: entry('./src/popup.ts')
   }
 }

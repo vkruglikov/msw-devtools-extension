@@ -1,16 +1,22 @@
 import React, {
   ChangeEventHandler,
   ComponentProps,
+  Fragment,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState
 } from 'react'
-import { validate } from '@msw-devtools/json-config'
+import {
+  LocalStorageConfigKey,
+  validateJsonConfig,
+  ValidationError
+} from '@msw-devtools/core'
 
 import packageJson from '../../package.json'
 
-import { getStatus, saveTo } from './utils'
+import { getStatus, removeConfig, saveTo, setActiveConfig } from './utils'
 
 import { Alert } from './Alert/Alert'
 import { Button } from './Button/Button'
@@ -18,34 +24,53 @@ import { Status } from './Status/Status'
 import { DocsLink } from './DocsLink'
 
 import styles from './App.module.css'
+import { LinkButton } from './LinkButton/LinkButton'
+import { ConfigListButtons } from './ConfigListButtons/ConfigListButtons'
 
 export const App = () => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [host, setHost] = useState<string>()
+  const [uploadButtonState, setUploadButtonState] = useState<{
+    status: 'pending' | 'error' | 'idle'
+    issues?: ValidationError['issues']
+  }>({
+    status: 'idle'
+  })
+  const [status, setStatus] = useState<Awaited<ReturnType<typeof getStatus>>>()
+
+  const [host, setHost] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const [handleStatus, setHandleStatus] =
     useState<ComponentProps<typeof Status>['type']>('pending')
   const [configStatus, setConfigStatus] =
     useState<ComponentProps<typeof Status>['type']>('pending')
-  const [verificationStatus, setVerificationStatus] =
-    useState<ComponentProps<typeof Status>['type']>('pending')
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const fetchStatuses = useCallback(async () => {
-    setHandleStatus('pending')
-    setConfigStatus('pending')
-    setVerificationStatus('pending')
-    setHost(undefined)
-
-    const statuses = await getStatus()
-
-    setHandleStatus(statuses.hasHandle ? 'success' : 'error')
-    setConfigStatus(statuses.hasConfig ? 'success' : 'error')
-    setVerificationStatus(statuses.configIsValid ? 'success' : 'error')
-    setHost(statuses.host)
+    setStatus(await getStatus(host))
   }, [])
 
   useEffect(() => {
+    if (!status) return
+
+    setHandleStatus(status.hasHandle ? 'success' : 'error')
+    setConfigStatus(status.hasConfig ? 'success' : 'error')
+    setHost(status.host)
+  }, [status])
+
+  const handleSetActive = async (key: LocalStorageConfigKey) => {
+    if (!host) return
+
+    await setActiveConfig(host, key)
+    fetchStatuses()
+  }
+
+  const handleRemoveConfig = async (key: LocalStorageConfigKey) => {
+    if (!host) return
+
+    await removeConfig(host, key)
+    fetchStatuses()
+  }
+
+  useLayoutEffect(() => {
     fetchStatuses()
   }, [fetchStatuses])
 
@@ -54,22 +79,35 @@ export const App = () => {
     if (!file) return
     inputRef.current!.value = ''
 
-    setIsLoading(true)
-    setVerificationStatus('pending')
+    setUploadButtonState({
+      status: 'pending'
+    })
 
     const reader = new FileReader()
     reader.onload = async (event) => {
       try {
         const jsonData = JSON.parse(event.target?.result as string)
-        const jsonConfig = validate(jsonData)
-        await saveTo(jsonConfig)
-        setConfigStatus('success')
-        setVerificationStatus('success')
+        const jsonConfig = validateJsonConfig(jsonData)
+
+        if (!host) throw new Error('Host is not defined')
+
+        await saveTo(host, jsonConfig)
+        setUploadButtonState({
+          status: 'idle'
+        })
+        fetchStatuses()
       } catch (e) {
-        setVerificationStatus('error')
+        if (e instanceof ValidationError) {
+          setUploadButtonState({
+            status: 'error',
+            issues: e.errors
+          })
+        } else {
+          setUploadButtonState({
+            status: 'error'
+          })
+        }
         console.error(e)
-      } finally {
-        setIsLoading(false)
       }
     }
     reader.readAsText(file)
@@ -83,11 +121,11 @@ export const App = () => {
           {(() => {
             switch (handleStatus) {
               case 'success':
-                return <>Handler has been detected</>
+                return <>Msw handler has been detected</>
               default:
                 return (
                   <>
-                    Handler has not been detected, please follow the{' '}
+                    Msw handler has not been detected, please follow the{' '}
                     <DocsLink>getting started guide</DocsLink>
                   </>
                 )
@@ -100,22 +138,16 @@ export const App = () => {
               case 'success':
                 return <>JSON config has been detected</>
               default:
-                return <>Upload JSON file with mocks</>
+                return <>JSON config hasn't been detected</>
             }
           })()}
         </Status>
-        {verificationStatus !== 'pending' && (
-          <Status type={verificationStatus}>
-            {(() => {
-              switch (verificationStatus) {
-                case 'success':
-                  return <>JSON config is valid</>
-                default:
-                  return <>Invalid JSON, please check the format</>
-              }
-            })()}
-          </Status>
-        )}
+        <ConfigListButtons
+          onRemove={handleRemoveConfig}
+          onSetActive={handleSetActive}
+          activeKey={status?.activeConfig}
+          list={status?.configNames}
+        />
       </Alert>
       <input
         className={styles.fileInput}
@@ -124,8 +156,22 @@ export const App = () => {
         onChange={handleLoadFiles}
         accept=".json"
       />
-      <Button disabled={isLoading} onClick={() => inputRef.current!.click()}>
-        {isLoading ? 'Saving...' : 'Upload json file'}
+      <Button
+        disabled={uploadButtonState.status === 'pending' || !host}
+        onClick={() => inputRef.current!.click()}
+      >
+        {uploadButtonState.status === 'pending' && 'Saving...'}
+        {uploadButtonState.status === 'error' && (
+          <Status type="error">
+            {uploadButtonState.issues?.map((err, index) => (
+              <Fragment key={index}>
+                {`${err.path.join('.')}:${err.message}`}
+                <br />
+              </Fragment>
+            )) || 'Failed to upload JSON config'}
+          </Status>
+        )}
+        {uploadButtonState.status === 'idle' && 'Upload JSON config'}
       </Button>
       <div className={styles.footer}>
         For more details, visit <DocsLink>Github</DocsLink> (v

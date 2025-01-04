@@ -5,13 +5,20 @@ const CopyPlugin = require('copy-webpack-plugin')
 const IS_DEV = process.env.NODE_ENV === 'development'
 
 module.exports = ({ root, port, wdsClient = true }) => ({
-  mode: IS_DEV ? 'development' : 'production',
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack']
+      },
+      {
+        test: /\.(png)$/i,
+        type: 'asset/resource'
       },
       {
         test: /\.module\.css$/i,
@@ -61,7 +68,9 @@ module.exports = ({ root, port, wdsClient = true }) => ({
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.WDS_PORT': JSON.stringify(port)
+      'process.env.WDS_EXTENSION_CLIENT_URL': JSON.stringify(
+        `ws://localhost:${port}/ws`
+      )
     })
   ],
   performance: {

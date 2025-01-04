@@ -1,8 +1,8 @@
-import { MessageType } from '@msw-devtools/core'
 import {
+  MessageType,
   BackgroundReceiveMessage,
   BackgroundResponseMessage
-} from '@msw-devtools/core/src'
+} from '@msw-devtools/core'
 
 const script = document.createElement('script')
 script.src = chrome.runtime.getURL('injected.js')
@@ -12,11 +12,14 @@ script.onload = () => {
 ;(document.head || document.documentElement).appendChild(script)
 
 window.addEventListener('message', (event) => {
-  if (
-    event.source === window &&
-    event.data.type === MessageType.Injected &&
-    event.data.requestId
-  ) {
+  if (event.source !== window) return
+
+  if (event.data.type === MessageType.HandleInitialized) {
+    chrome.runtime.sendMessage<BackgroundReceiveMessage>({
+      type: MessageType.HandleInitialized,
+      host: window.location.host
+    })
+  } else if (event.data.type === MessageType.Injected && event.data.requestId) {
     chrome.runtime.sendMessage<
       BackgroundReceiveMessage,
       BackgroundResponseMessage
