@@ -1,6 +1,19 @@
 {
   "name": "@msw-devtools/connect",
-  "version": "0.1",
+  "description": "MSW Devtools Extension",
+  "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vkruglikov/msw-devtools-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vkruglikov/msw-devtools-extension/issues"
+  },
+  "homepage": "https://github.com/vkruglikov/msw-devtools-extension",
+  "author": "Valentin Kruglikov dev.n@bk.ru",
   "type": "module",
   "license": "MIT",
   "types": "./dist/index.d.ts",
