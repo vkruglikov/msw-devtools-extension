@@ -1,0 +1,35 @@
+name: Deploy @msw-devtools/connect
+
+on:
+  push:
+    branches: ['master']
+    paths:
+      - 'packages/connect/package.json'
+      - '.github/workflows/connect.yml'
+
+jobs:
+  release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup-node
+      - uses: ./.github/actions/install-npm-deps
+
+      - name: Build @msw-devtools/connect
+        run: npm run build -- --filter=@msw-devtools/connect
+
+      - name: Publish
+        uses: changesets/action@master
+        with:
+          publish: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

@@ -1,6 +1,7 @@
 {
   "name": "@msw-devtools/extension",
   "version": "0.1",
+  "private": true,
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development npx webpack serve",

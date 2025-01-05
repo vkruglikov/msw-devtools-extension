@@ -26,8 +26,8 @@ Switch seamlessly between multiple JSON configurations within the same host envi
 
 <img width="300px" src="./media/extension/multi-configs.png" />
 
-### 🔄 Edit json config in the DevTools
-WORK IN PROGRESS.....
+### 🔄 Edit json config in the DevTools 
+<img src="https://img.shields.io/badge/WIP-roadmap_feature-ff6a33" />
 
 ## Motivation 💡
 
@@ -70,4 +70,4 @@ Chrome Extension is not yet published to Chrome Web Store.
 
 You can only install it downloading the build and loading it as an unpacked extension.
 
-[![Download Chrome Extension](https://img.shields.io/badge/download-chrome_extension_dist-brightgreen)](https://github.com/vkruglikov/msw-devtools-extension/releases/download/latest/dist.zip)
+[![Download Chrome Extension](https://img.shields.io/badge/download-chrome_extension_dist-ff6a33)](https://github.com/vkruglikov/msw-devtools-extension/releases/download/latest/dist.zip)

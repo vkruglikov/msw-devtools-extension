@@ -8,6 +8,8 @@
   "scripts": {
     "check-types": "tsc --noEmit",
     "build": "turbo check-types build",
+    "changeset": "changeset",
+    "release": "npm run build -- --filter=@msw-devtools/connect && changeset publish",
     "dev": "turbo dev",
     "clean": "rimraf packages/*/{node_modules,dist,.turbo} node_modules .turbo"
   },
@@ -21,6 +23,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@changesets/cli": "^2.27.11",
     "@svgr/webpack": "^8.1.0",
     "@types/chrome": "^0.0.287",
     "@types/node": "^22.10.2",
