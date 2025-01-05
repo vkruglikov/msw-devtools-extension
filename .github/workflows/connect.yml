@@ -3,9 +3,6 @@ name: Deploy @msw-devtools/connect
 on:
   push:
     branches: ['master']
-    paths:
-      - 'packages/connect/package.json'
-      - '.github/workflows/connect.yml'
 
 jobs:
   release:
@@ -13,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
