@@ -6,6 +6,13 @@
 
 <h1 align="center">Mock Service Worker DevTools Extension</h1>
 
+![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/build-check.yml/badge.svg)
+![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/connect.yml/badge.svg)
+![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/demo.yml/badge.svg)
+![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/extension.yml/badge.svg)
+[![npm version](https://img.shields.io/npm/v/@msw-devtools/connect.svg)](https://www.npmjs.com/package/@msw-devtools/connect)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jkclaelcdjjledfendcippjbhngkhkpm.svg)](https://chrome.google.com/webstore/detail/jkclaelcdjjledfendcippjbhngkhkpm)
+
 > **⚠️ WARNING: Pre-release Version**  
 > In this pre-release version, every update clears the configuration storage!  
 > Be cautious and make sure to save your JSON configurations locally to avoid losing them. 💾
@@ -66,7 +73,9 @@ setupWorker(...handlers).start({
 
 ### Install Chrome Extension
 
-Chrome Extension is not yet published to Chrome Web Store.
+Chrome Extension is not yet published to Chrome Web Store, because it's in waiting for review.
+
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jkclaelcdjjledfendcippjbhngkhkpm.svg)](https://chrome.google.com/webstore/detail/jkclaelcdjjledfendcippjbhngkhkpm)
 
 You can only install it downloading the build and loading it as an unpacked extension.
 
