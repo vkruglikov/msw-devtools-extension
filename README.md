@@ -79,4 +79,4 @@ Chrome Extension is not yet published to Chrome Web Store, because it's in waiti
 
 You can only install it downloading the build and loading it as an unpacked extension.
 
-[![Download Chrome Extension](https://img.shields.io/badge/download-chrome_extension_dist-ff6a33)](https://github.com/vkruglikov/msw-devtools-extension/releases/tag/latest)
+[![Download Chrome Extension](https://img.shields.io/badge/download-chrome_extension_dist-ff6a33)](https://github.com/vkruglikov/msw-devtools-extension/releases/tag/%40msw-devtools%2Fconnect%40latest)
