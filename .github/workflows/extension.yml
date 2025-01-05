@@ -36,4 +36,4 @@ jobs:
             dist.tar.gz
           make_latest: true
           name: "@msw-devtools/extension"
-          tag_name: "latest"
+          tag_name: "@msw-devtools/connect@latest"
