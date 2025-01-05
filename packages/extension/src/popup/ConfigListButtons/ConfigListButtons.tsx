@@ -1,14 +1,15 @@
 import React, { FC } from 'react'
+import { clsx } from 'clsx'
 
-import styles from './ConfigListButtons.module.css'
-
-import TrashIcon from './trash.svg'
 import {
   BackgroundResponseMessage,
   LocalStorageConfigKey,
   MessageType
 } from '@msw-devtools/core'
-import { clsx } from 'clsx'
+
+import TrashIcon from './trash.svg'
+
+import styles from './ConfigListButtons.module.css'
 
 export const ConfigListButtons: FC<{
   list?: Extract<
@@ -21,9 +22,12 @@ export const ConfigListButtons: FC<{
 }> = ({ list, onSetActive, activeKey, onRemove }) => {
   if (!list) return
 
+  const listEntries = Object.entries(list)
+  if (!listEntries.length) return
+
   return (
     <div className={styles.wrapper}>
-      {Object.entries(list).map(([name, { key }], index) => (
+      {listEntries.map(([name, { key }], index) => (
         <div
           className={clsx(styles.item, {
             [styles.active]: key === activeKey

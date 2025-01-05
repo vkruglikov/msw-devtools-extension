@@ -4,7 +4,6 @@ import React, {
   Fragment,
   useCallback,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState
 } from 'react'
@@ -19,10 +18,11 @@ import { Alert } from './Alert/Alert'
 import { Button } from './Button/Button'
 import { Status } from './Status/Status'
 import { DocsLink } from './DocsLink'
+import { ConfigListButtons } from './ConfigListButtons/ConfigListButtons'
+
+import { useCheckHandlerAvailability } from './useCheckHandlerAvailability'
 
 import styles from './App.module.css'
-import { LinkButton } from './LinkButton/LinkButton'
-import { ConfigListButtons } from './ConfigListButtons/ConfigListButtons'
 
 export const App = () => {
   const [uploadButtonState, setUploadButtonState] = useState<{
@@ -43,7 +43,9 @@ export const App = () => {
 
   const fetchStatuses = useCallback(async () => {
     setStatus(await getStatus(host))
-  }, [])
+  }, [host])
+
+  useCheckHandlerAvailability(status, fetchStatuses)
 
   useEffect(() => {
     if (!status) return
@@ -66,10 +68,6 @@ export const App = () => {
     await removeConfig(host, key)
     fetchStatuses()
   }
-
-  useLayoutEffect(() => {
-    fetchStatuses()
-  }, [fetchStatuses])
 
   const handleLoadFiles: ChangeEventHandler<HTMLInputElement> = (event) => {
     const file = event.target.files?.[0]
