@@ -1,15 +1,11 @@
 name: Deploy @msw-devtools/extension
 
 on:
-  push:
-    branches: ['master']
-    paths:
-      - 'packages/extension/package.json'
   workflow_dispatch:
 
 jobs:
-  release:
-    name: Build and Release
+  deploy-extension:
+    name: Deploy @msw-devtools/extension
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -35,6 +31,5 @@ jobs:
           files: |
             dist.zip
             dist.tar.gz
-          make_latest: true
           name: "@msw-devtools/extension"
           tag_name: "@msw-devtools/extension@latest"

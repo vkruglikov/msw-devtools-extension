@@ -1,4 +1,5 @@
 {
+  "globalEnv": ["NODE_ENV", "PUBLIC_PATH"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

@@ -63,7 +63,7 @@ module.exports = ({ root, port, wdsClient = true }) => ({
   output: {
     filename: '[name].js',
     path: path.resolve(root, 'dist'),
-    publicPath: '/',
+    publicPath: process.env.PUBLIC_PATH || '/',
     clean: true
   },
   plugins: [
@@ -74,6 +74,7 @@ module.exports = ({ root, port, wdsClient = true }) => ({
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.PUBLIC_PATH': JSON.stringify(process.env.PUBLIC_PATH || '/'),
       'process.env.WDS_EXTENSION_CLIENT_URL': JSON.stringify(
         `ws://localhost:${port}/ws`
       )

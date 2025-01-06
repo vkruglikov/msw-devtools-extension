@@ -5,8 +5,8 @@ on:
     branches: ['master']
 
 jobs:
-  release:
-    name: Build and Release
+  deploy-connect:
+    name: Deploy @msw-devtools/connect
     runs-on: ubuntu-latest
     permissions:
       contents: write

@@ -12,9 +12,6 @@ const handlers = [
 setupWorker(...handlers).start({
   onUnhandledRequest: 'bypass',
   serviceWorker: {
-    url:
-      process.env.NODE_ENV === 'production'
-        ? '/msw-devtools-extension/mockServiceWorker.js'
-        : '/mockServiceWorker.js'
+    url: `${process.env.PUBLIC_PATH || '/'}mockServiceWorker.js`
   }
 })

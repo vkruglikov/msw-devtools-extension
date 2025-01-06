@@ -15,14 +15,16 @@ permissions:
 
 jobs:
   deploy-demo:
-    name: Install dependencies
+    name: Deploy @msw-devtools/demo
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-node
       - uses: ./.github/actions/install-npm-deps
 
-      - name: Build all packages
+      - name: Build package
+        env:
+          PUBLIC_PATH: /msw-devtools-extension/
         run: npm run build -- --filter=@msw-devtools/demo
 
       - name: Setup Pages
