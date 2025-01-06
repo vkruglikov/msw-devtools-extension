@@ -1,0 +1,31 @@
+name: Compare Version
+
+on:
+  workflow_call:
+    inputs:
+      package_path:
+        required: true
+        type: string
+    outputs:
+      has_changed:
+        description: Indicates whether the version has changed
+        value: ${{ jobs.compare-version.outputs.has_changed }}
+
+jobs:
+  compare-version:
+    name: Check Version
+    runs-on: ubuntu-latest
+    outputs:
+      has_changed: ${{ steps.version_check.outputs.has_changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check package.json version
+        uses: hugorcd/version-diff-action@v1.0.2
+        id: version_check
+        with:
+          path: ${{ inputs.package_path }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -6,10 +6,7 @@
 
 <h1 align="center">Mock Service Worker DevTools Extension</h1>
 
-![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/build-check.yml/badge.svg)
-![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/connect.yml/badge.svg)
-![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/demo.yml/badge.svg)
-![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/extension.yml/badge.svg)
+![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/deploy.yml/badge.svg)
 [![npm version](https://img.shields.io/npm/v/@msw-devtools/connect.svg)](https://www.npmjs.com/package/@msw-devtools/connect)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jkclaelcdjjledfendcippjbhngkhkpm.svg)](https://chrome.google.com/webstore/detail/jkclaelcdjjledfendcippjbhngkhkpm)
 

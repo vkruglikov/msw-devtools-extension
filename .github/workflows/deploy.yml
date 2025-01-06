@@ -1,0 +1,55 @@
+name: Deploy packages
+
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  validation:
+    name: Validation and Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+      - uses: ./.github/actions/install-npm-deps
+
+      - name: Build package
+        run: npm run build
+
+
+  deploy-extension:
+    needs: validation
+    name: Deploy @msw-devtools/extension
+    uses: ./.github/workflows/deploy-extension.yml
+
+  deploy-demo:
+    needs: validation
+    name: Deploy @msw-devtools/demo
+    uses: ./.github/workflows/deploy-demo.yml
+
+  changesets:
+    name: Deploy @msw-devtools/connect
+    needs: validation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commit
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup-node
+      - uses: ./.github/actions/install-npm-deps
+
+      - name: Build package
+        env:
+          PUBLIC_PATH: /msw-devtools-extension/
+        run: npm run build -- --filter=@msw-devtools/connect
+
+      - name: Publish
+        uses: changesets/action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

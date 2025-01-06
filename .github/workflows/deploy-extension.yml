@@ -1,11 +1,19 @@
 name: Deploy @msw-devtools/extension
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
-  deploy-extension:
+  compare-version:
+    name: Guard
+    uses: ./.github/workflows/compare-version.yml
+    with:
+      package_path: './packages/extension/package.json'
+
+  deploy:
     name: Deploy @msw-devtools/extension
+    needs: compare-version
+    if: needs.compare-version.outputs.has_changed == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -19,10 +27,8 @@ jobs:
         run: npm run build -- --filter=@msw-devtools/extension
 
       - name: Archive @msw-devtools/extension
-        run: zip -r dist.zip ./packages/extension/dist
-
-      - name: Archive @msw-devtools/extension
         run: |
+          zip -r dist.zip ./packages/extension/dist
           tar -czf dist.tar.gz ./packages/extension/dist
 
       - name: Release
@@ -31,5 +37,6 @@ jobs:
           files: |
             dist.zip
             dist.tar.gz
+          make_latest: "true"
           name: "@msw-devtools/extension"
           tag_name: "@msw-devtools/extension@latest"

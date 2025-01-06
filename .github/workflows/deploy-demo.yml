@@ -1,22 +1,24 @@
 name: Deploy @msw-devtools/demo
 
 on:
-#  push:
-#    branches: ['master']
-#    paths:
-#      - 'packages/demo/**'
-#      - '.github/workflows/demo.yml'
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+  workflow_call:
 
 jobs:
-  deploy-demo:
+  compare-version:
+    name: Guard
+    uses: ./.github/workflows/compare-version.yml
+    with:
+      package_path: './packages/demo/package.json'
+
+  deploy:
     name: Deploy @msw-devtools/demo
+    needs: compare-version
+    if: needs.compare-version.outputs.has_changed == 'true'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-node
