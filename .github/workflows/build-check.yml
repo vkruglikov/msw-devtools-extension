@@ -1,7 +1,7 @@
 name: Build check
 
-on:
-  push:
+#on:
+#  push:
 
 jobs:
   install-deps:

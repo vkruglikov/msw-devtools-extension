@@ -1,12 +1,12 @@
-name: Deploy @msw-devtools/connect
+name: Deploy packages
 
 on:
   push:
     branches: ['master']
 
 jobs:
-  deploy-connect:
-    name: Deploy @msw-devtools/connect
+  changesets:
+    name: Deploy packages
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,8 +22,17 @@ jobs:
 
       - name: Publish
         uses: changesets/action@master
+        id: changesets
         with:
           publish: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Debug hasChangesets Output
+        run: |
+          echo "Has Changesets: ${{ steps.changesets.outputs.hasChangesets }}"
+
+      - name: Debug Outputs Object
+        run: |
+          echo "All Outputs: ${{ toJson(steps.changesets.outputs) }}"
