@@ -1,3 +1,4 @@
+![Private](https://img.shields.io/badge/status-private-red?)
 ### Start dev server
 
 ```bash

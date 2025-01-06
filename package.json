@@ -10,6 +10,7 @@
     "build": "turbo check-types build",
     "changeset": "changeset",
     "dev": "turbo dev",
+    "docs": "turbo docs",
     "clean": "rimraf packages/*/{node_modules,dist,.turbo} node_modules .turbo"
   },
   "author": "Valentin Kruglikov",

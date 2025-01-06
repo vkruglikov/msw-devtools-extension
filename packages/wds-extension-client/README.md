@@ -1,3 +1,4 @@
+![Private](https://img.shields.io/badge/status-private-red?)
 ## Webpack dev server chrome extension client
 
 Calls `chrome.runtime.reload()` every time the dev server sends a reload message.

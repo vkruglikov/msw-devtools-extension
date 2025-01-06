@@ -11,10 +11,14 @@
     "dist"
   ],
   "scripts": {
+    "docs": "npx zod2md --entry src/index.ts --title \"MSW JSON Config reference\" --output docs/README.md",
     "build": "microbundle --no-pkg-main -f modern",
     "dev": "microbundle watch --no-pkg-main -f modern"
   },
   "dependencies": {
     "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "zod2md": "^0.1.4"
   }
 }

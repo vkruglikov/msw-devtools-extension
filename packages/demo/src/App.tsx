@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import { Button } from '@msw-devtools/extension/src/popup/Button/Button'
-import { JsonData } from 'json-edit-react'
 
 import { JsonEditor } from './components/JsonEditor/JsonEditor'
 
@@ -68,7 +67,16 @@ export const App = () => {
   return (
     <div className={styles.wrapper}>
       <center>
-        <MswLogo />
+        <a
+          target="_blank"
+          style={{
+            all: 'unset',
+            cursor: 'pointer'
+          }}
+          href="https://github.com/vkruglikov/msw-devtools-extension?tab=readme-ov-file#get-started-"
+        >
+          <MswLogo />
+        </a>
         <h1>MSW Devtools Extension</h1>
       </center>
       <h2>
