@@ -22,10 +22,21 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Check package.json version
-        uses: hugorcd/version-diff-action@v1.0.2
+      - name: Pick packages
+        run: |
+          cp ${{ inputs.package_path }} current_package.json
+          git reset --hard HEAD~1
+          cp ${{ inputs.package_path }} previous_package.json
+
+      - name: Compare package.json versions
         id: version_check
-        with:
-          path: ${{ inputs.package_path }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          CURRENT_VERSION=$(jq -r '.version' current_package.json)
+          PREVIOUS_VERSION=$(jq -r '.version' previous_package.json)
+          HAS_CHANGED="false"
+          echo "Current version: $CURRENT_VERSION"
+          echo "Previous version: $PREVIOUS_VERSION"
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            HAS_CHANGED="true"
+          fi
+          echo "has_changed=HAS_CHANGED" >> $GITHUB_ENV

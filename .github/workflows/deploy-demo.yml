@@ -20,6 +20,9 @@ jobs:
       pages: write
       id-token: write
     steps:
+      - run: |
+          echo ${{ needs.compare-version.outputs.has_changed }}
+          exit 1
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-node
       - uses: ./.github/actions/install-npm-deps
