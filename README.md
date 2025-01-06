@@ -30,7 +30,10 @@ Switch seamlessly between multiple JSON configurations within the same host envi
 
 <img width="300px" src="./media/extension/multi-configs.png" />
 
-### 🔄 Edit json config in the DevTools 
+### Edit json config in the DevTools 
+<img src="https://img.shields.io/badge/WIP-roadmap_feature-ff6a33" />
+
+### Pause/Resume mode
 <img src="https://img.shields.io/badge/WIP-roadmap_feature-ff6a33" />
 
 ## Motivation 💡
@@ -74,7 +77,7 @@ Chrome Extension is not yet published to Chrome Web Store, because it's in waiti
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jkclaelcdjjledfendcippjbhngkhkpm.svg)](https://chrome.google.com/webstore/detail/jkclaelcdjjledfendcippjbhngkhkpm)
 
-You can only install it downloading the build and loading it as an unpacked extension.
+You can only install it downloading the build and [loading it as an unpacked extension](./packages/extension/README.md).
 
 [![Download Chrome Extension](https://img.shields.io/badge/download-chrome_extension_dist-ff6a33)](https://github.com/vkruglikov/msw-devtools-extension/releases/tag/%40msw-devtools%2Fextension%40latest)
 
