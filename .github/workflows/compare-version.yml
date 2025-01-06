@@ -33,10 +33,10 @@ jobs:
         run: |
           CURRENT_VERSION=$(jq -r '.version' current_package.json)
           PREVIOUS_VERSION=$(jq -r '.version' previous_package.json)
-          HAS_CHANGED="false"
+          HAS_CHANGED=false
           echo "Current version: $CURRENT_VERSION"
           echo "Previous version: $PREVIOUS_VERSION"
           if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
-            HAS_CHANGED="true"
+            HAS_CHANGED=true
           fi
-          echo "has_changed=HAS_CHANGED" >> $GITHUB_ENV
+          echo "has_changed=$HAS_CHANGED" >> $GITHUB_OUTPUT

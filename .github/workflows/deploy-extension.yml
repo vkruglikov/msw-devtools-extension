@@ -19,10 +19,6 @@ jobs:
       contents: write
 
     steps:
-      - run: |
-          echo ${{ needs.compare-version.outputs.has_changed }}
-          exit 1
-
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-node
       - uses: ./.github/actions/install-npm-deps
@@ -35,12 +31,19 @@ jobs:
           zip -r dist.zip ./packages/extension/dist
           tar -czf dist.tar.gz ./packages/extension/dist
 
-      - name: Release
+      - name: Delete existing release
+        run: |
+          gh release delete @msw-devtools/extension@latest --yes || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create New Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             dist.zip
             dist.tar.gz
+          body: "Check the [CHANGELOG](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/packages/extension/CHANGELOG.md) for details."
           make_latest: "true"
           name: "@msw-devtools/extension"
           tag_name: "@msw-devtools/extension@latest"
