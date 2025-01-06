@@ -1,5 +1,5 @@
 {
-  "globalEnv": ["NODE_ENV", "PUBLIC_PATH"],
+  "globalEnv": ["PUBLIC_PATH"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

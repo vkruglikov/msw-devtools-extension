@@ -9,6 +9,12 @@
     "type": "git",
     "url": "git@github.com:vkruglikov/msw-devtools-extension.git"
   },
+  "keywords": [
+    "msw",
+    "mswjs",
+    "devtools",
+    "extension"
+  ],
   "bugs": {
     "url": "https://github.com/vkruglikov/msw-devtools-extension/issues"
   },

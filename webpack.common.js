@@ -1,10 +1,18 @@
 const path = require('path')
 const webpack = require('webpack')
 const CopyPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const IS_DEV = process.env.NODE_ENV === 'development'
 
-module.exports = ({ root, port, wdsClient = true }) => ({
+module.exports = ({
+  outputSkipHash = [],
+  root,
+  html = [],
+  plugins = [],
+  port,
+  wdsClient = true
+}) => ({
   mode: IS_DEV ? 'development' : 'production',
   module: {
     rules: [
@@ -61,7 +69,12 @@ module.exports = ({ root, port, wdsClient = true }) => ({
     extensions: ['.tsx', '.ts', '.js']
   },
   output: {
-    filename: '[name].js',
+    filename: (pathData) => {
+      if (outputSkipHash.includes(pathData.chunk.name)) {
+        return '[name].js'
+      }
+      return '[name].[contenthash].js'
+    },
     path: path.resolve(root, 'dist'),
     publicPath: process.env.PUBLIC_PATH || '/',
     clean: true
@@ -78,7 +91,18 @@ module.exports = ({ root, port, wdsClient = true }) => ({
       'process.env.WDS_EXTENSION_CLIENT_URL': JSON.stringify(
         `ws://localhost:${port}/ws`
       )
-    })
+    }),
+    ...html.map(
+      ({ filename, ...restOptions }) =>
+        new HtmlWebpackPlugin({
+          ...restOptions,
+          filename,
+          publicPath: process.env.PUBLIC_PATH || '/',
+          scriptLoading: 'blocking',
+          template: `src/${filename}`
+        })
+    ),
+    ...plugins
   ],
   performance: {
     hints: false

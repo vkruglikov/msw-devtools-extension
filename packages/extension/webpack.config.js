@@ -1,4 +1,5 @@
 const createWebpackConfig = require('../../webpack.common.js')
+const ManifestBumpPlugin = require('./ManifestBumpPlugin')
 
 const IS_DEV = process.env.NODE_ENV === 'development'
 
@@ -10,9 +11,17 @@ const entry = (paths) =>
 
 module.exports = {
   ...createWebpackConfig({
+    outputSkipHash: ['background', 'content', 'injected'],
     root: __dirname,
     port: 8082,
-    wdsClient: false
+    wdsClient: false,
+    html: [
+      {
+        filename: 'popup.html',
+        chunks: ['popup']
+      }
+    ],
+    plugins: [new ManifestBumpPlugin()]
   }),
   entry: {
     background: entry('./src/background.ts'),

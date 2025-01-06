@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener(() => {
    */
   chrome.storage.local.clear()
 })
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (!tab.url || !/^https?:/.test(tab.url)) return
 
   if (changeInfo.status === 'loading') {
@@ -20,10 +20,14 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       tabId
     })
   } else if (changeInfo.status === 'complete') {
-    chrome.scripting.executeScript({
-      target: { tabId: tabId },
-      files: ['content.js']
-    })
+    try {
+      await chrome.scripting.executeScript({
+        target: { tabId: tabId },
+        files: ['content.js']
+      })
+    } catch (e) {
+      console.error('await chrome.scripting.executeScript', e)
+    }
   }
 })
 chrome.runtime.onMessage.addListener(handleMessage)
