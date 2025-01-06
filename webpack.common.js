@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const IS_DEV = process.env.NODE_ENV === 'development'
 
@@ -67,6 +68,10 @@ module.exports = ({
     : false,
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
   },
   output: {
     filename: (pathData) => {
