@@ -2,16 +2,16 @@ import type { JsonConfig } from '@msw-devtools/json-config'
 import type { ResponseResolver } from 'msw'
 
 export enum MessageType {
-  Content = 'msw-devtools-extension-content',
-  HandleInitialized = 'msw-devtools-extension_handleInitialized',
-  HandledRequest = 'msw-devtools-extension_handled',
-  UnhandledMessageError = 'msw-devtools-extension_unhandledMessageError',
-  SetJsonConfig = 'msw-devtools-extension_setJsonConfig',
-  RemoveJsonConfig = 'msw-devtools-extension_removeJsonConfig',
-  SetActiveJsonConfig = 'msw-devtools-extension_setActive',
-  UnhandledRequest = 'msw-devtools-extension_unhandled',
-  Status = 'msw-devtools-extension_status',
-  Injected = 'msw-devtools-extension-injected'
+  Content = 'mswde_content',
+  HandleInitialized = 'mswde_handleInitialized',
+  HandledRequest = 'mswde_handledRequest',
+  UnhandledMessageError = 'mswde_unhandledMessageError',
+  SetJsonConfig = 'mswde_setJsonConfig',
+  RemoveJsonConfig = 'mswde_removeJsonConfig',
+  SetActiveJsonConfig = 'mswde_setActiveConfig',
+  UnhandledRequest = 'mswde_unhandledRequest',
+  Status = 'mswde_status',
+  Injected = 'mswde-injected'
 }
 
 export type MswDevtoolsExtensionProxy = {
