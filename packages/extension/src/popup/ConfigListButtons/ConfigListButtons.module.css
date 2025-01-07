@@ -1,50 +1,50 @@
 .wrapper {
-    display: flex;
-    row-gap: 5px;
-    column-gap: 5px;
-    flex-flow: wrap;
-    margin-top: 10px;
+  display: flex;
+  row-gap: 5px;
+  column-gap: 5px;
+  flex-flow: wrap;
+  margin-top: 10px;
 }
 
 .item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #282828;
-    border: 1px solid #404040;
-    border-radius: 5px;
-    overflow: hidden;
-    max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #282828;
+  border: 1px solid #404040;
+  border-radius: 5px;
+  overflow: hidden;
+  max-width: 100%;
 
-    &.active {
-        border: 1px solid var(--primary-color);
-    }
+  &.active {
+    border: 1px solid var(--primary-color);
+  }
 }
 
 .button {
-    all: unset;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 3px 10px;
-    height: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.5em;
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 3px 10px;
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5em;
 
-    &:not(&:first-child) {
-        padding-left: 5px;
-        padding-right: 5px;
-        flex-shrink: 0;
-    }
+  &:not(&:first-child) {
+    padding-left: 5px;
+    padding-right: 5px;
+    flex-shrink: 0;
+  }
 
-    &:hover {
-        background-color: #404040;
-    }
+  &:hover {
+    background-color: #404040;
+  }
 
-    &:disabled&:hover {
-        cursor: not-allowed;
-        background: inherit;
-    }
+  &:disabled&:hover {
+    cursor: not-allowed;
+    background: inherit;
+  }
 }

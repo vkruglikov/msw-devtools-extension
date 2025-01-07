@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
 import { clsx } from 'clsx'
+import React, { FC } from 'react'
 
 import { BackgroundResponseMessage, MessageType } from '@msw-devtools/core'
 
-import TrashIcon from './trash.svg'
 import PausedIcon from './pause.svg'
 import PlayIcon from './play.svg'
+import TrashIcon from './trash.svg'
 
 import styles from './ConfigListButtons.module.css'
 

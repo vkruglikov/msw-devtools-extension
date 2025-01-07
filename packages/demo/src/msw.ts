@@ -1,6 +1,7 @@
-import { http, HttpResponse } from 'msw'
-import { createResponseResolver } from '@msw-devtools/connect'
+import { HttpResponse, http } from 'msw'
 import { setupWorker } from 'msw/browser'
+
+import { createResponseResolver } from '@msw-devtools/connect'
 
 const handlers = [
   http.get('/user', () => {

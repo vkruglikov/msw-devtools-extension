@@ -1,4 +1,5 @@
 import { z } from 'zod'
+
 export { ZodError as ValidationError } from 'zod'
 
 const MAJOR_CONFIG_VERSION = 1

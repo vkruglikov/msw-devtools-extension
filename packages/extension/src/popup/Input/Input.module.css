@@ -1,24 +1,24 @@
 .wrapper {
-    all: unset;
+  all: unset;
 
-    cursor: pointer;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #404040;
-    border-radius: 8px;
-    text-align: left;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #232323;
-    color: rgb(255 255 255);
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #232323;
+  color: rgb(255 255 255);
 
-    &:hover {
-        background-color: #404040;
-    }
+  &:hover {
+    background-color: #404040;
+  }
 
-    &:disabled {
-        cursor: not-allowed;
-        background-color: #282828;
-        opacity: 0.5;
-    }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #282828;
+    opacity: 0.5;
+  }
 }

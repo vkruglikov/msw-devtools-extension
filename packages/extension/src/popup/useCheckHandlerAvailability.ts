@@ -1,5 +1,6 @@
-import { getStatus } from './utils'
 import { useEffect, useRef } from 'react'
+
+import { getStatus } from './utils'
 
 export const useCheckHandlerAvailability = (
   status: Awaited<ReturnType<typeof getStatus>> | undefined,

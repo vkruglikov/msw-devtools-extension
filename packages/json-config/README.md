@@ -1,9 +1,11 @@
 ![Private](https://img.shields.io/badge/status-private-red?)
+
 ## @msw-devtools/json-config
 
 JSON config used by the extension to configure the responses.
 
 ### Example config
+
 ```json
 {
   "version": 1,
@@ -36,9 +38,10 @@ JSON config used by the extension to configure the responses.
 }
 ```
 
-### ZOD Schema 
+### ZOD Schema
+
 [MSW JSON Config reference](./docs/README.md)
 
 ### Create your own config
-[DEMO page](https://vkruglikov.github.io/msw-devtools-extension/)
 
+[DEMO page](https://vkruglikov.github.io/msw-devtools-extension/)

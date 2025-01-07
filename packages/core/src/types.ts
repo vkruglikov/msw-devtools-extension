@@ -1,5 +1,6 @@
-import type { JsonConfig } from '@msw-devtools/json-config'
 import type { ResponseResolver } from 'msw'
+
+import type { JsonConfig } from '@msw-devtools/json-config'
 
 export enum MessageType {
   Content = 'mswde_content',

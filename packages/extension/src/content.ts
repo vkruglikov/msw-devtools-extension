@@ -1,9 +1,9 @@
 import {
-  MessageType,
   BackgroundReceiveMessage,
   BackgroundResponseMessage,
   ContentReceiveMessage,
-  InjectedReceiveMessage
+  InjectedReceiveMessage,
+  MessageType
 } from '@msw-devtools/core'
 
 const postMessage = (message: InjectedReceiveMessage) => {

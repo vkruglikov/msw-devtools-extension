@@ -1,4 +1,4 @@
-import { passthrough, ResponseResolver, HttpResponse } from 'msw'
+import { HttpResponse, ResponseResolver, passthrough } from 'msw'
 
 const responseResolver: ResponseResolver = ({ requestId, request }) => {
   return new Promise((resolve, reject) => {

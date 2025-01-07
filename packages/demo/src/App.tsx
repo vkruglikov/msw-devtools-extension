@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 
-import { Button } from '@msw-devtools/extension/src/popup/Button/Button'
 import { JsonConfig } from '@msw-devtools/json-config'
+import exampleConfig from '@msw-devtools/json-config/src/example.json'
+
+import { Alert } from '@msw-devtools/extension/src/popup/Alert/Alert'
+import { Button } from '@msw-devtools/extension/src/popup/Button/Button'
+import { Input } from '@msw-devtools/extension/src/popup/Input/Input'
+import { Status } from '@msw-devtools/extension/src/popup/Status/Status'
 
 import { JsonEditor } from './components/JsonEditor/JsonEditor'
 
-import exampleConfig from '@msw-devtools/json-config/src/example.json'
-
-import { Status } from '@msw-devtools/extension/src/popup/Status/Status'
-import { Alert } from '@msw-devtools/extension/src/popup/Alert/Alert'
-import { Input } from '@msw-devtools/extension/src/popup/Input/Input'
-
-import MswLogo from '../../../media/msw-logo.svg'
-import ExtensionScreenStatuses from '../../../media/extension/statuses.png'
 import ExtensionScreenConfigs from '../../../media/extension/multi-configs.png'
+import ExtensionScreenStatuses from '../../../media/extension/statuses.png'
+import MswLogo from '../../../media/msw-logo.svg'
 
 import styles from './App.module.css'
 

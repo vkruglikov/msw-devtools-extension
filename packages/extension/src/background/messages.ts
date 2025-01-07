@@ -4,15 +4,15 @@ import {
   MessageType
 } from '@msw-devtools/core'
 
-import { tabsQuery } from './tabs'
+import { activeMswResolvers, getIndexFromTab } from './activeMswResolvers'
 import {
   getJsonConfig,
-  setJsonConfig,
   getJsonConfigNames,
   removeJsonConfig,
-  setActiveJsonConfig
+  setActiveJsonConfig,
+  setJsonConfig
 } from './storage'
-import { activeMswResolvers, getIndexFromTab } from './activeMswResolvers'
+import { tabsQuery } from './tabs'
 
 type HandlersMap = {
   [K in BackgroundReceiveMessage['type']]: (

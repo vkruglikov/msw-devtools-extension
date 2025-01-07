@@ -7,20 +7,20 @@ import React, {
   useRef,
   useState
 } from 'react'
-import { validateJsonConfig, ValidationError } from '@msw-devtools/json-config'
+
 import { LocalStorageConfigKey } from '@msw-devtools/core'
 
-import packageJson from '../../package.json'
-
-import { getStatus, removeConfig, saveTo, setActiveConfig } from './utils'
+import { ValidationError, validateJsonConfig } from '@msw-devtools/json-config'
 
 import { Alert } from './Alert/Alert'
 import { Button } from './Button/Button'
-import { Status } from './Status/Status'
-import { DocsLink } from './DocsLink'
 import { ConfigListButtons } from './ConfigListButtons/ConfigListButtons'
-
+import { DocsLink } from './DocsLink'
+import { Status } from './Status/Status'
 import { useCheckHandlerAvailability } from './useCheckHandlerAvailability'
+import { getStatus, removeConfig, saveTo, setActiveConfig } from './utils'
+
+import packageJson from '../../package.json'
 
 import styles from './App.module.css'
 

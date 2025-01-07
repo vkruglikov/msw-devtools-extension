@@ -1,9 +1,9 @@
 import {
+  BackgroundReceiveMessage,
+  BackgroundResponseMessage,
   JsonConfig,
   LocalStorageConfigKey,
-  MessageType,
-  BackgroundReceiveMessage,
-  BackgroundResponseMessage
+  MessageType
 } from '@msw-devtools/core'
 
 const sendMessage = <

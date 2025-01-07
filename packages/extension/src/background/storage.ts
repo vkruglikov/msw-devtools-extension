@@ -1,11 +1,11 @@
 import {
   BackgroundResponseMessage,
   ChromeExtensionLocalStorage,
+  ChromeExtensionLocalStorageActiveKey,
+  ChromeExtensionLocalStorageConfig,
   JsonConfig,
   LocalStorageConfigKey,
-  MessageType,
-  ChromeExtensionLocalStorageActiveKey,
-  ChromeExtensionLocalStorageConfig
+  MessageType
 } from '@msw-devtools/core'
 
 const getJsonConfigStorageKeys = async (host: string) => {

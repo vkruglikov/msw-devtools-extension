@@ -1,7 +1,7 @@
 import {
-  MessageType,
   ContentReceiveMessage,
-  InjectedReceiveMessage
+  InjectedReceiveMessage,
+  MessageType
 } from '@msw-devtools/core'
 
 const postMessage = (message: ContentReceiveMessage) => {

@@ -1,10 +1,10 @@
 .wrapper {
-    all: unset;
+  all: unset;
 
-    cursor: pointer;
-    color: #858585;
+  cursor: pointer;
+  color: #858585;
 
-    &:hover {
-        opacity: 0.8;
-    }
+  &:hover {
+    opacity: 0.8;
+  }
 }

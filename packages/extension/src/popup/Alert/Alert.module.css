@@ -1,16 +1,16 @@
 .wrapper {
-    border: 1px solid #334155;
-    border-radius: 8px;
-    padding: 5px  10px;
-    background: #2a2c30;
-    font-weight: bold;
-    color: #ffffff;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 5px 10px;
+  background: #2a2c30;
+  font-weight: bold;
+  color: #ffffff;
 
-    > * {
-        margin-bottom: 6px;
-    }
+  > * {
+    margin-bottom: 6px;
+  }
 
-    > *:last-child {
-        margin-bottom: 0;
-    }
+  > *:last-child {
+    margin-bottom: 0;
+  }
 }

@@ -3,5 +3,20 @@
   "tabWidth": 2,
   "printWidth": 80,
   "semi": false,
-  "singleQuote": true
+  "singleQuote": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@msw-devtools/core(.*)$",
+    "^@msw-devtools/json-config(.*)$",
+    "^@msw-devtools/connect(.*)$",
+    "^@msw-devtools/extension(.*)$",
+    "^@msw-devtools/demo(.*)$",
+    "^@msw-devtools/(.*)$",
+    "^[./](?!.*\\.(css|\\w+)$)",
+    "^[./](?!.*\\.css$)",
+    "^[./].*\\.css$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

@@ -21,16 +21,19 @@ This Chrome extension simplifies working with [Mock Service Worker (MSW)](https:
 ## Key Features 🌟
 
 ### 📂 JSON Import
+
 Easily upload JSON files containing mock request configurations.
 
 <img width="300px" src="./media/extension/statuses.png" />
 
 ### 🔄 Multi-JSON Support
+
 Switch seamlessly between multiple JSON configurations within the same host environment.
 
 <img width="300px" src="./media/extension/multi-configs.png" />
 
 ### 🚀 Pass-Through Mode
+
 Enable pass-through mode to bypass JSON config and send requests directly to the server
 even if configurations are uploaded.
 
@@ -54,17 +57,15 @@ npm install @msw-devtools/connect --save-exact
 > We assume that you are already familiar with [Mock Service Worker (MSW)](https://mswjs.io/) and have
 > set up your project to work with it. If not, please visit the official [MSW](https://mswjs.io/) website for guidance.
 
-
 Just add the response resolver handler from `@msw-devtools/connect`
 
 ```javascript
-import { setupWorker } from 'msw/browser'
-import { createResponseResolver } from '@msw-devtools/connect'
 import { http } from 'msw'
+import { setupWorker } from 'msw/browser'
 
-const handlers = [
-  http.all('*', createResponseResolver())
-]
+import { createResponseResolver } from '@msw-devtools/connect'
+
+const handlers = [http.all('*', createResponseResolver())]
 
 setupWorker(...handlers).start({
   onUnhandledRequest: 'bypass'
@@ -88,7 +89,6 @@ You can only install it downloading the build and [loading it as an unpacked ext
 ### See the demo
 
 [@msw-devtools/demo](https://vkruglikov.github.io/msw-devtools-extension/)
-
 
 ## Roadmap Features 🚧
 

@@ -1,10 +1,11 @@
-import React, { FC } from 'react'
 import {
-  githubDarkTheme,
   JsonData,
-  JsonEditor as JsonEditorCore
+  JsonEditor as JsonEditorCore,
+  githubDarkTheme
 } from 'json-edit-react'
-import { validateJsonConfig, ValidationError } from '@msw-devtools/json-config'
+import React, { FC } from 'react'
+
+import { ValidationError, validateJsonConfig } from '@msw-devtools/json-config'
 
 import styles from './JsonEditor.module.css'
 

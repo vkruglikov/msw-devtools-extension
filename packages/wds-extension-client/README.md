@@ -1,9 +1,11 @@
 ![Private](https://img.shields.io/badge/status-private-red?)
+
 ## Webpack dev server chrome extension client
 
 Calls `chrome.runtime.reload()` every time the dev server sends a reload message.
 
 ### webpack.config.js
+
 ```javascript
 module.exports = {
   devServer: {
@@ -14,10 +16,7 @@ module.exports = {
     }
   },
   entry: {
-    background: [
-      '@msw-devtools/wds-extension-client',
-      './src/background.ts'
-    ],
+    background: ['@msw-devtools/wds-extension-client', './src/background.ts']
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -25,6 +24,6 @@ module.exports = {
         `ws://localhost:8082/ws`
       )
     })
-  ],
+  ]
 }
 ```

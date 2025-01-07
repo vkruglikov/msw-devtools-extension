@@ -1,63 +1,63 @@
 html,
 body {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    padding: 0;
-    margin: 0;
-    background: #171717;
-    line-height: 1.4em;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  background: #171717;
+  line-height: 1.4em;
 }
 
 :root {
-    --primary-color: rgb(255 106 51);
+  --primary-color: rgb(255 106 51);
 }
 
 :global(.text-primary) {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 * {
-    box-sizing: border-box !important;
+  box-sizing: border-box !important;
 }
 
 .wrapper {
-    width: 350px;
-    color: #ffffff;
-    padding: 10px;
+  width: 350px;
+  color: #ffffff;
+  padding: 10px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .fileInput {
-    display: none;
+  display: none;
 }
 
 .footer {
-    opacity: 0.5;
-    text-align: center;
+  opacity: 0.5;
+  text-align: center;
 
-    &:hover {
-        opacity: 0.8;
-    }
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 
-    .icon {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #2ce32c;
-    }
+  .icon {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #2ce32c;
+  }
 }
 
 .header {
-    font-weight: bold;
-    color: var(--primary-color)
+  font-weight: bold;
+  color: var(--primary-color);
 }
