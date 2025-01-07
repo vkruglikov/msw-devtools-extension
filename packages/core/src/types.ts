@@ -100,12 +100,18 @@ export type BackgroundResponseMessage =
             hasHandle: boolean
             hasConfig: boolean
             activeConfig?: LocalStorageConfigKey
-            configNames: Record<
-              string,
-              {
-                key: LocalStorageConfigKey
-              }
-            >
+            configNames: (
+              | {
+                  name: string
+                  passthrough?: false
+                  key: LocalStorageConfigKey
+                }
+              | {
+                  name: string
+                  passthrough: true
+                  key: `host=${string}&name=__mswde_passthrough_config&jsonConfig=1`
+                }
+            )[]
           }
         }
     ))

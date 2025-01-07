@@ -10,5 +10,9 @@
     "skipLibCheck": true
   },
   "include": ["packages/*/src/**/*", "packages/*/*.d.ts", "declaration.d.ts"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": [
+    "node_modules",
+    "packages/*/dist/**/*",
+    "packages/*/node_modules/**/*"
+  ]
 }

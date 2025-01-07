@@ -93,7 +93,7 @@ export const getStatus = async (host: string) => {
       BackgroundResponseMessage,
       { type: MessageType.Status; payload: any }
     >['payload']
-  >((resolve, reject) => {
+  >((resolve) => {
     sendMessage<
       Extract<BackgroundReceiveMessage, { type: MessageType.Status }>
     >(
@@ -112,7 +112,7 @@ export const getStatus = async (host: string) => {
             host,
             hasHandle: false,
             hasConfig: false,
-            configNames: {}
+            configNames: []
           })
         }
       },
@@ -123,17 +123,25 @@ export const getStatus = async (host: string) => {
           hasHandle: true,
           hasConfig: true,
           activeConfig: 'host=localhost&name=production&jsonConfig=1',
-          configNames: {
-            production: {
+          configNames: [
+            {
+              name: 'production',
               key: 'host=localhost&name=production&jsonConfig=1'
             },
-            development: {
+            {
+              name: 'development',
               key: 'host=localhost&name=development&jsonConfig=1'
             },
-            staging: {
+            {
+              name: 'staging',
               key: 'host=localhost&name=staging&jsonConfig=1'
+            },
+            {
+              name: 'passthrough',
+              passthrough: true,
+              key: `host=${host}&name=__mswde_passthrough_config&jsonConfig=1`
             }
-          },
+          ],
           host: window.location.host
         }
       }

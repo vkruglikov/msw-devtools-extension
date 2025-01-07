@@ -40,6 +40,7 @@ const messages: HandlersMap = {
   [MessageType.HandleInitialized]: async ({ type, host }, sender) => {
     activeMswResolvers.add({
       tabId: sender.tab!.id!,
+      windowId: sender.tab!.windowId!,
       host
     })
 
@@ -95,11 +96,10 @@ const messages: HandlersMap = {
 
       let hasConfig = false
       let currentConfig: Awaited<ReturnType<typeof getJsonConfig>> = null
-      let configNames: Awaited<ReturnType<typeof getJsonConfigNames>> = {}
+      let configNames: Awaited<ReturnType<typeof getJsonConfigNames>> = []
 
       try {
         currentConfig = await getJsonConfig(host)
-
         configNames = await getJsonConfigNames(host)
         hasConfig = !!currentConfig
       } catch (e) {

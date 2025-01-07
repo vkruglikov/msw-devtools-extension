@@ -39,19 +39,23 @@ export const getJsonConfigNames = async (
     (memo, [key, config]) => {
       if (!config) return memo
 
-      memo[config.name] = {
+      memo.push({
+        name: config.name,
         key: key as LocalStorageConfigKey
-      }
+      })
+
       return memo
     },
-    {} as Extract<
-      BackgroundResponseMessage,
-      {
-        type: MessageType.Status
-        payload: any
-      }
-    >['payload']['configNames']
+    [] as Awaited<ReturnType<typeof getJsonConfigNames>>
   )
+
+  if (names.length) {
+    names.push({
+      name: 'passthrough',
+      passthrough: true,
+      key: `host=${host}&name=__mswde_passthrough_config&jsonConfig=1`
+    })
+  }
 
   return names
 }

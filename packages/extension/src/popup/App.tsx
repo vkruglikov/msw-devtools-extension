@@ -131,9 +131,13 @@ export const App = () => {
           {(() => {
             switch (configStatus) {
               case 'success':
-                return <>JSON config has been detected</>
+                return <>Active JSON config has been detected</>
               default:
-                return <>JSON config hasn't been detected</>
+                return !status?.configNames.length ? (
+                  <>JSON config hasn't been detected</>
+                ) : (
+                  <>Active JSON config hasn't been detected</>
+                )
             }
           })()}
         </Status>

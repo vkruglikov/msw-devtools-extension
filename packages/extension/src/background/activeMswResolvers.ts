@@ -3,6 +3,7 @@ import Tab = chrome.tabs.Tab
 type IndexInfo = {
   tabId: number
   host?: string
+  windowId?: number
 }
 
 export const activeMswResolvers = {
