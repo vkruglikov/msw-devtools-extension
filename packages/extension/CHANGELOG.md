@@ -1,5 +1,12 @@
 # @msw-devtools/extension
 
+## 0.1.6
+
+### Patch Changes
+
+- 367f0dd: Moved to react@19
+- 031f59e: Typescript in injected and content scripts
+
 ## 0.1.5
 
 ### Patch Changes
