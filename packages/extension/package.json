@@ -1,6 +1,6 @@
 {
   "name": "@msw-devtools/extension",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "MSW Devtools Extension",
   "private": true,
   "license": "MIT",
