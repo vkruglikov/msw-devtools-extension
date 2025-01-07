@@ -48,13 +48,10 @@ jobs:
       - uses: ./.github/actions/setup-node
       - uses: ./.github/actions/install-npm-deps
 
-      - name: Build package
-        env:
-          PUBLIC_PATH: /msw-devtools-extension/
-        run: npm run build -- --filter=@msw-devtools/connect
-
       - name: Publish
         uses: changesets/action@master
+        with:
+          publish: npm run build -- --filter=@msw-devtools/connect && npx changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
