@@ -1,6 +1,7 @@
 ---
+'@msw-devtools/connect': patch
+'@msw-devtools/demo': patch
 '@msw-devtools/extension': patch
-'@msw-devtools/core': patch
 ---
 
 Passthrough support

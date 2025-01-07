@@ -104,3 +104,7 @@ You can only install it downloading the build and [loading it as an unpacked ext
 ### Upload JSON Config to extension
 
 [@msw-devtools/json-config](./packages/json-config/README.md)
+
+### See the demo
+
+[@msw-devtools/demo](https://vkruglikov.github.io/msw-devtools-extension/)
