@@ -31,30 +31,10 @@ Switch seamlessly between multiple JSON configurations within the same host envi
 <img width="300px" src="./media/extension/multi-configs.png" />
 
 ### 🚀 Pass-Through Mode
-Enable pass-through mode to bypass MSW and send requests directly to the server
+Enable pass-through mode to bypass JSON config and send requests directly to the server
 even if configurations are uploaded.
 
 <img width="300px" src="./media/extension/passthrough-mode.png" />
-
-
-## Roadmap Features 🚧
-
-### Edit json config in the DevTools
-
-Currently, you can only upload JSON files, but you can't edit them in the DevTools.
-
-### Upload multiple JSON config at once
-
-Currently, you can only upload one JSON file at a time, because
-it simplifies the process of validation.
-
-### Multi window support
-
-Currently, you can use multi tabs with different configurations per host, but only one browser window is supported.
-
-### Early request interception
-
-Currently, requests sent before the extension is initialized are not intercepted by JSON handlers.
 
 ## Motivation 💡
 
@@ -108,3 +88,23 @@ You can only install it downloading the build and [loading it as an unpacked ext
 ### See the demo
 
 [@msw-devtools/demo](https://vkruglikov.github.io/msw-devtools-extension/)
+
+
+## Roadmap Features 🚧
+
+### Edit json config in the DevTools
+
+Currently, you can only upload JSON files, but you can't edit them in the DevTools.
+
+### Upload multiple JSON config at once
+
+Currently, you can only upload one JSON file at a time, because
+it simplifies the process of validation.
+
+### Multi window support
+
+Currently, you can use multi tabs with different configurations per host, but only one browser window is supported.
+
+### Early request interception
+
+Currently, requests sent before the extension is initialized are not intercepted by JSON handlers.
