@@ -9,6 +9,7 @@
     "check-types": "tsc --noEmit",
     "build": "turbo check-types build",
     "changeset": "changeset",
+    "publish:connect": "npm run build -- --filter=@msw-devtools/connect && changeset publish",
     "dev": "turbo dev",
     "docs": "turbo docs",
     "clean": "rimraf packages/*/{node_modules,dist,.turbo} node_modules .turbo"

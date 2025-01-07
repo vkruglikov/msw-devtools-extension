@@ -51,7 +51,7 @@ jobs:
       - name: Publish
         uses: changesets/action@master
         with:
-          publish: npm run build -- --filter=@msw-devtools/connect && npx changeset publish
+          publish: npm run publish:connect
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
