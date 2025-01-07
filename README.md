@@ -92,19 +92,8 @@ You can only install it downloading the build and [loading it as an unpacked ext
 
 ## Roadmap Features 🚧
 
-### Edit json config in the DevTools
-
-Currently, you can only upload JSON files, but you can't edit them in the DevTools.
-
-### Upload multiple JSON config at once
-
-Currently, you can only upload one JSON file at a time, because
-it simplifies the process of validation.
-
-### Multi window support
-
-Currently, you can use multi tabs with different configurations per host, but only one browser window is supported.
-
-### Early request interception
-
-Currently, requests sent before the extension is initialized are not intercepted by JSON handlers.
+- **Edit json config in the DevTools**: Currently, you can only upload JSON files, but you can't edit them in the DevTools.
+- **Upload multiple JSON configs**: Currently, you can only upload one JSON file at a time, because
+  it simplifies the process of validation.
+- **Multi window support**: Currently, you can use multi tabs with different configurations per host, but only one browser window is supported.
+- **Early request interception**: Currently, requests sent before the extension is initialized are not intercepted by JSON handlers.

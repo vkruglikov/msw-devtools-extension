@@ -6,8 +6,8 @@
   },
   "packageManager": "npm@8.5.0",
   "scripts": {
-    "lint": "npx prettier --check .",
-    "lint:fix": "npx prettier --write .",
+    "lint": "npx prettier --check \"./**/*.{ts,tsx}\"",
+    "lint:fix": "npx prettier --write \"./**/*.{ts,tsx}\"",
     "check-types": "tsc --noEmit",
     "build": "turbo check-types build",
     "changeset": "changeset",
