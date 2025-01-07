@@ -2,7 +2,7 @@ import type { ResponseResolver } from 'msw'
 
 import type { JsonConfig } from '@msw-devtools/json-config'
 
-export enum MessageType {
+export const enum MessageType {
   Content = 'mswde_content',
   HandleInitialized = 'mswde_handleInitialized',
   HandledRequest = 'mswde_handledRequest',
