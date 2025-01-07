@@ -1,9 +1,8 @@
-# @msw-devtools/extension
+# @msw-devtools/connect
 
-## 0.1.5
+## 0.0.4
 
 ### Patch Changes
 
 - f5d17b1: Simplified message types
-- a6fca11: Added icon 128
 - c8a7263: Passthrough support
