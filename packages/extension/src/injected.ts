@@ -1,29 +1,28 @@
-import { MessageType } from '@msw-devtools/core'
+import {
+  MessageType,
+  ContentReceiveMessage,
+  InjectedReceiveMessage
+} from '@msw-devtools/core'
+
+const postMessage = (message: ContentReceiveMessage) => {
+  window.postMessage(message, window.location.origin)
+}
 
 window.__MSW_DEVTOOLS_EXTENSION = {
   handleInitialized: () => {
-    window.postMessage(
-      {
-        type: MessageType.HandleInitialized
-      },
-      window.location.origin
-    )
+    postMessage({
+      type: MessageType.HandleInitialized
+    })
   },
   resolve: ({ request, requestId }) => {
     return new Promise((resolve, reject) => {
-      const handleMessage = (
-        e: MessageEvent<{
-          type: MessageType
-          requestId: string
-          response: {
-            body: BodyInit
-            init?: ResponseInit
-          }
-        }>
-      ) => {
+      const handleMessage = (e: MessageEvent<InjectedReceiveMessage>) => {
         if (
-          e.data.requestId !== requestId ||
-          e.data.type === MessageType.Injected
+          !e.data ||
+          ![MessageType.UnhandledRequest, MessageType.HandledRequest].includes(
+            e.data?.type
+          ) ||
+          e.data.requestId !== requestId
         ) {
           return
         }
@@ -37,18 +36,14 @@ window.__MSW_DEVTOOLS_EXTENSION = {
       }
       window.addEventListener('message', handleMessage)
 
-      window.postMessage(
-        {
-          type: MessageType.Injected,
-          requestId,
-          request: {
-            id: requestId,
-            method: request.method,
-            url: request.url
-          }
-        },
-        window.location.origin
-      )
+      postMessage({
+        type: MessageType.Injected,
+        requestId,
+        request: {
+          method: request.method,
+          url: request.url
+        }
+      })
     })
   }
 }

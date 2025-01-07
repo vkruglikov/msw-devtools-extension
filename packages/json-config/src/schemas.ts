@@ -1,4 +1,5 @@
 import { z } from 'zod'
+export { ZodError as ValidationError } from 'zod'
 
 const MAJOR_CONFIG_VERSION = 1
 
@@ -64,3 +65,6 @@ export const jsonConfigSchema = z
       .describe('List of handlers to intercept.')
   })
   .describe('JSON configuration schema.')
+
+export const validateJsonConfig = (data: any): JsonConfig =>
+  jsonConfigSchema.parse(data)

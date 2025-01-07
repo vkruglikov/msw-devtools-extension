@@ -39,6 +39,31 @@ export type ChromeExtensionLocalStorageActiveKey = {
 export type ChromeExtensionLocalStorage = ChromeExtensionLocalStorageConfig &
   ChromeExtensionLocalStorageActiveKey
 
+export type ContentReceiveMessage =
+  | {
+      type: MessageType.Injected
+      requestId: string
+      request: {
+        url: string
+        method: string
+      }
+    }
+  | {
+      type: MessageType.HandleInitialized
+    }
+
+export type InjectedReceiveMessage =
+  | {
+      type: MessageType.HandledRequest
+      requestId: string
+      response: JsonConfig['handlers'][string]
+    }
+  | {
+      type: MessageType.UnhandledRequest
+      requestId: string
+    }
+  | undefined
+
 export type BackgroundReceiveMessage =
   | {
       type: MessageType.Content

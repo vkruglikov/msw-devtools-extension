@@ -1,8 +1,14 @@
 import {
   MessageType,
   BackgroundReceiveMessage,
-  BackgroundResponseMessage
+  BackgroundResponseMessage,
+  ContentReceiveMessage,
+  InjectedReceiveMessage
 } from '@msw-devtools/core'
+
+const postMessage = (message: InjectedReceiveMessage) => {
+  window.postMessage(message, window.location.origin)
+}
 
 const script = document.createElement('script')
 script.src = chrome.runtime.getURL('injected.js')
@@ -11,37 +17,40 @@ script.onload = () => {
 }
 ;(document.head || document.documentElement).appendChild(script)
 
-window.addEventListener('message', (event) => {
-  if (event.source !== window) return
+window.addEventListener(
+  'message',
+  async (event: MessageEvent<ContentReceiveMessage>) => {
+    if (event.source !== window) return
 
-  if (event.data.type === MessageType.HandleInitialized) {
-    chrome.runtime.sendMessage<BackgroundReceiveMessage>({
-      type: MessageType.HandleInitialized,
-      host: window.location.host
-    })
-  } else if (event.data.type === MessageType.Injected && event.data.requestId) {
-    chrome.runtime.sendMessage<
-      BackgroundReceiveMessage,
-      BackgroundResponseMessage
-    >({ type: MessageType.Content, request: event.data.request }, (message) => {
-      if (chrome.runtime.lastError) {
-        console.error(chrome.runtime.lastError)
-        window.postMessage(
-          {
-            type: MessageType.UnhandledRequest
-          },
-          window.location.origin
-        )
-        return
+    if (event.data.type === MessageType.HandleInitialized) {
+      try {
+        await chrome.runtime.sendMessage<BackgroundReceiveMessage>({
+          type: MessageType.HandleInitialized,
+          host: window.location.host
+        })
+      } catch (e) {
+        console.error('Handler initialization error', e)
       }
+    } else if (event.data.type === MessageType.Injected) {
+      try {
+        const response = await chrome.runtime.sendMessage<
+          Extract<BackgroundReceiveMessage, { type: MessageType.Content }>,
+          Extract<
+            BackgroundResponseMessage,
+            { type: MessageType.HandledRequest | MessageType.UnhandledRequest }
+          >
+        >({ type: MessageType.Content, request: event.data.request })
 
-      window.postMessage(
-        {
-          ...message,
+        postMessage({
+          ...response,
           requestId: event.data.requestId
-        },
-        window.location.origin
-      )
-    })
+        })
+      } catch (e) {
+        postMessage({
+          type: MessageType.UnhandledRequest,
+          requestId: event.data.requestId
+        })
+      }
+    }
   }
-})
+)

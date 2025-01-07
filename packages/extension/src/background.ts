@@ -10,7 +10,9 @@ chrome.runtime.onInstalled.addListener(() => {
   /**
    * Because the extension has pre-release version, which may have breaking changes,
    */
-  chrome.storage.local.clear()
+  chrome.storage.local.clear().catch((e) => {
+    console.info('[mswde] Clear storage after install', e)
+  })
 })
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (!tab.url || !/^https?:/.test(tab.url)) return
@@ -26,7 +28,10 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
         files: ['content.js']
       })
     } catch (e) {
-      console.error('await chrome.scripting.executeScript', e)
+      console[e?.toString().includes('showing error page') ? 'info' : 'error'](
+        '[mswde] Inject content script',
+        e
+      )
     }
   }
 })

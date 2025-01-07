@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { Button } from '@msw-devtools/extension/src/popup/Button/Button'
+import { JsonConfig } from '@msw-devtools/json-config'
 
 import { JsonEditor } from './components/JsonEditor/JsonEditor'
 
@@ -15,7 +16,6 @@ import ExtensionScreenStatuses from '../../../media/extension/statuses.png'
 import ExtensionScreenConfigs from '../../../media/extension/multi-configs.png'
 
 import styles from './App.module.css'
-import { JsonConfig } from '@msw-devtools/json-config'
 
 export const App = () => {
   const [json, setJson] = useState<JsonConfig>(exampleConfig as JsonConfig)
@@ -105,7 +105,16 @@ export const App = () => {
         Install the MSW Devtools Extension from the Chrome Web Store or directly
         in your browser by downloading the extension build from the repository.
       </p>
-      <h2>3. Create your MSW Json configuration based on an example</h2>
+      <h2>3. Create your MSW Json configuration</h2>
+      <p>
+        To know more about MSW JSON configuration in the{' '}
+        <a
+          href="https://github.com/vkruglikov/msw-devtools-extension/blob/master/packages/json-config"
+          target="_blank"
+        >
+          JSON config documentation.
+        </a>
+      </p>
       <div className={styles.controlButtons}>
         <Button className={styles.controlButton} onClick={handleClickAddPath}>
           Add handler
