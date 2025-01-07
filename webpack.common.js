@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const rimraf = require('rimraf')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
@@ -107,6 +108,20 @@ module.exports = ({
           template: `src/${filename}`
         })
     ),
+    ...(!IS_DEV
+      ? [
+          new (class {
+            apply(compiler) {
+              compiler.hooks.emit.tap('remove LICENSE.txt', (compilation) => {
+                for (let name in compilation.assets) {
+                  if (!name.endsWith('LICENSE.txt')) continue
+                  delete compilation.assets[name]
+                }
+              })
+            }
+          })()
+        ]
+      : []),
     ...plugins
   ],
   performance: {
