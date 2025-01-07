@@ -6,8 +6,8 @@ export const useCheckHandlerAvailability = (
   status: Awaited<ReturnType<typeof getStatus>> | undefined,
   fetch: () => Promise<void>
 ) => {
-  const refStatus = useRef<typeof status>()
-  const timeoutRef = useRef<NodeJS.Timeout>()
+  const refStatus = useRef<typeof status>(undefined)
+  const timeoutRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     refStatus.current = status
