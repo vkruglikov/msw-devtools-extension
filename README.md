@@ -57,6 +57,8 @@ Instead of manually defining handlers for every request, you can now upload pre-
 npm install @msw-devtools/connect --save-exact
 ```
 
+Use `--save-exact` when you install chrome extension from the repository
+
 ### Integrate to existing MSW setup
 
 > We assume that you are already familiar with [Mock Service Worker (MSW)](https://mswjs.io/) and have

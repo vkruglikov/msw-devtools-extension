@@ -3,6 +3,8 @@ name: Update Badges
 on:
   push:
     branches: ['master']
+    paths:
+      - 'packages/extension/package.json'
 
 jobs:
   badges:
