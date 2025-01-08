@@ -27,7 +27,7 @@ jobs:
 
       - name: Build package
         env:
-          PUBLIC_PATH: /msw-devtools-extension/
+          PUBLIC_PATH: /
         run: npm run build -- --filter=@msw-devtools/demo
 
       - name: Setup Pages
