@@ -1,7 +1,11 @@
 <p align="center">
   <img src="media/chrome-devtools.svg" width="100" alt="DevTools logo" />
-  <img src="media/msw-logo.svg" width="100" alt="Mock Service Worker logo" />
-  <img src="media/chrome-extension.svg" width="100" alt="Chrome Web Store logo" />
+  <a target="_blank" href="https://mswjs.io">
+    <img src="media/msw-logo.svg" width="100" alt="Mock Service Worker logo" />
+  </a>
+  <a target="_blank" href="https://chromewebstore.google.com/detail/jkclaelcdjjledfendcippjbhngkhkpm">
+    <img src="media/chrome-extension.svg" width="100" alt="Chrome Web Store logo" />
+  </a>
 </p>
 
 <h1 align="center">Mock Service Worker DevTools Extension</h1>
@@ -9,6 +13,7 @@
 ![Build Check](https://github.com/vkruglikov/msw-devtools-extension/actions/workflows/deploy.yml/badge.svg)
 [![npm version](https://img.shields.io/npm/v/@msw-devtools/connect.svg)](https://www.npmjs.com/package/@msw-devtools/connect)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jkclaelcdjjledfendcippjbhngkhkpm.svg)](https://chrome.google.com/webstore/detail/jkclaelcdjjledfendcippjbhngkhkpm)
+[![Repository Build version](./.github/badges/extension-version.svg)](https://github.com/vkruglikov/msw-devtools-extension/releases/tag/%40msw-devtools%2Fextension%40latest)
 
 > **⚠️ WARNING: Pre-release Version**  
 > In this pre-release version, every update clears the configuration storage!  
@@ -72,15 +77,28 @@ setupWorker(...handlers).start({
 })
 ```
 
-### Install Chrome Extension
+## Install Chrome Extension
 
-Chrome Extension is not yet published to Chrome Web Store, because it's in waiting for review.
+### Repository build
 
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jkclaelcdjjledfendcippjbhngkhkpm.svg)](https://chrome.google.com/webstore/detail/jkclaelcdjjledfendcippjbhngkhkpm)
+[![Repository Build version](./.github/badges/extension-version.svg)](https://github.com/vkruglikov/msw-devtools-extension/releases/tag/%40msw-devtools%2Fextension%40latest)
 
-You can only install it downloading the build and [loading it as an unpacked extension](./packages/extension/README.md).
+You can install it downloading the build and [loading it as an unpacked extension](./packages/extension/README.md).
 
-[![Download Chrome Extension](https://img.shields.io/badge/download-chrome_extension_dist-ff6a33)](https://github.com/vkruglikov/msw-devtools-extension/releases/tag/%40msw-devtools%2Fextension%40latest)
+> **⚠️ WARNING**
+> If you chose to install the extension from the repository, you will need install `@msw-devtools/connect` with `--save-exact` flag to avoid version mismatch.
+
+### Chrome Web Store
+
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jkclaelcdjjledfendcippjbhngkhkpm.svg?label=extension+version)](https://chrome.google.com/webstore/detail/jkclaelcdjjledfendcippjbhngkhkpm)
+![Chrome Web Store Last Updated](https://img.shields.io/chrome-web-store/last-updated/jkclaelcdjjledfendcippjbhngkhkpm?label=last+release&color=green)
+
+> **⚠️ WARNING**
+> Chrome Web Store version can be outdated because of the review process.
+>
+> If you want to install from the Chrome Web Store, you need to check the latest version in the repository and compare it with the Chrome Web Store version.
+>
+> We recommend using the latest build from the repository.
 
 ### Upload JSON Config to extension
 
@@ -88,7 +106,9 @@ You can only install it downloading the build and [loading it as an unpacked ext
 
 ### See the demo
 
-[@msw-devtools/demo](https://vkruglikov.github.io/msw-devtools-extension/)
+At this page we have installed msw and initialized with the `createResponseResolver` function from `@msw-devtools/connect`.
+
+[msw-devtools.com](https://vkruglikov.github.io/msw-devtools-extension/)
 
 ## Roadmap Features 🚧
 

@@ -1,0 +1,37 @@
+name: Update Badges
+
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  badges:
+    name: Update badges
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref_name }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update badges
+        run: |
+          PACKAGE_VERSION=$(jq -r '.version' packages/extension/package.json)
+          FORMATTED_DATE=$(date +"%d.%m.%Y")
+
+          echo $PACKAGE_VERSION
+          echo $TIMESTAMP
+          
+          curl -o .github/badges/extension-version.svg "https://img.shields.io/badge/repository_extension_version-v$PACKAGE_VERSION-orange"
+          git add .github/badges/
+
+          if ! git diff --quiet --cached -- .github/badges/; then
+            git config --local user.name "github-actions[bot]"
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Update extension version badge to $PACKAGE_VERSION"
+            git push
+          else
+            echo "No changes in the badges directory."
+          fi
